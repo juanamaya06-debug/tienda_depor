@@ -24,9 +24,21 @@
         .card-glow {
             box-shadow: 0 0 25px -5px rgba(59, 130, 246, 0.15);
         }
+        /* Transición suave para notificaciones flotantes */
+        .toast-transition {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
     </style>
 </head>
-<body class="text-slate-100 min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white">
+<body class="text-slate-100 min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white relative">
+
+    <!-- Notificador de Estado de Base de Datos (Toast Flotante) -->
+    <div id="db-toast" class="fixed top-20 right-4 z-50 transform translate-x-80 opacity-0 toast-transition pointer-events-none">
+        <div class="bg-slate-900 border border-blue-500/30 text-slate-100 px-5 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 card-glow">
+            <span id="toast-icon" class="text-lg">📡</span>
+            <span id="toast-message" class="text-xs font-semibold">Conectando con Firestore...</span>
+        </div>
+    </div>
 
     <!-- Header / Navbar -->
     <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
@@ -118,11 +130,54 @@
                         </div>
                     </div>
 
+                    <!-- NUEVA SECCIÓN: HISTORIAL DEPORTIVO ANTERIOR -->
+                    <div class="space-y-4 border-t border-slate-800/80 pt-6">
+                        <h3 class="text-lg font-bold text-cyan-400 flex items-center space-x-2">
+                            <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+                            <span>Historial Deportivo Anterior (Memoria Muscular)</span>
+                        </h3>
+                        <p class="text-xs text-slate-400">Cuéntanos sobre tu pasado activo para estructurar una línea de tiempo y entender tu memoria musculoesquelética.</p>
+                        
+                        <div class="grid sm:grid-cols-3 gap-6">
+                            <!-- Toggle Practicó Antes -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">¿Has practicado deporte antes?</label>
+                                <div class="flex space-x-3 mt-1">
+                                    <label class="relative flex items-center p-3 bg-slate-950 border border-slate-800 rounded-xl cursor-pointer hover:border-blue-500/50 transition-all w-1/2 justify-center">
+                                        <input type="radio" name="practico-deporte-antes" value="si" class="sr-only peer" checked onclick="toggleHistorialCampos(true)">
+                                        <span class="peer-checked:text-blue-400 text-xs font-semibold text-slate-300">Sí</span>
+                                    </label>
+                                    <label class="relative flex items-center p-3 bg-slate-950 border border-slate-800 rounded-xl cursor-pointer hover:border-blue-500/50 transition-all w-1/2 justify-center">
+                                        <input type="radio" name="practico-deporte-antes" value="no" class="sr-only peer" onclick="toggleHistorialCampos(false)">
+                                        <span class="peer-checked:text-blue-400 text-xs font-semibold text-slate-300">No</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- ¿Cuál deporte? -->
+                            <div id="contenedor-deporte-cual" class="transition-all duration-300">
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">¿Qué deporte(s) practicabas?</label>
+                                <input type="text" id="historial-deporte-cual" placeholder="Ej. Fútbol, Ciclismo, Natación" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none font-medium">
+                            </div>
+
+                            <!-- ¿Por cuánto tiempo? -->
+                            <div id="contenedor-deporte-tiempo" class="transition-all duration-300">
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">¿Por cuánto tiempo en total?</label>
+                                <select id="historial-deporte-tiempo" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none font-medium">
+                                    <option value="menos-6">Menos de 6 meses</option>
+                                    <option value="6-12">De 6 meses a 1 año</option>
+                                    <option value="1-3">De 1 a 3 años</option>
+                                    <option value="mas-3" selected>Más de 3 años</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Selección de 4 Perfiles de Deportistas -->
                     <div class="space-y-4 border-t border-slate-800/80 pt-6">
                         <h3 class="text-lg font-bold text-purple-400 flex items-center space-x-2">
                             <span class="w-2 h-2 rounded-full bg-purple-500"></span>
-                            <span>¿Qué tipo de deportista eres?</span>
+                            <span>¿Qué tipo de deportista eres en la actualidad?</span>
                         </h3>
                         <p class="text-xs text-slate-400">Selecciona el perfil que mejor se alinee con tu modalidad de entrenamiento para personalizar el diagnóstico.</p>
                         
@@ -333,7 +388,7 @@
 
                         <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800">
                             <span class="text-xs font-bold text-purple-400 uppercase tracking-widest block mb-1">Consejo Técnico de Confort:</span>
-                            <p class="text-xs text-slate-400 font-light" id="comodidad-consejo-txt">Nunca limites tu movilidad articular. Busca siempre costuras planas, tracción antideslizante y tecnologías que promuevan la termorregulación activa.</p>
+                            <p class="text-xs text-slate-400 font-light" id="comodidad-consejo-txt">Nunca limites tu movilidad articular. Busca siempre costuras planas, tracción antideslizante e innovaciones que promuevan la termorregulación activa.</p>
                         </div>
                     </div>
 
@@ -348,7 +403,7 @@
                 </div>
             </section>
 
-            <!-- PASO 3: CATÁLOGO DE ACCESORIOS RECOMENDADOS (Sustituye la Calculadora Solar) -->
+            <!-- PASO 3: CATÁLOGO DE ACCESORIOS RECOMENDADOS -->
             <section id="paso-tienda" class="space-y-8 hidden">
                 <div class="text-center max-w-2xl mx-auto mb-10">
                     <span class="text-xs font-bold bg-purple-500/10 text-purple-400 px-3.5 py-1.5 rounded-full border border-purple-500/20 uppercase">Equipamiento Exclusivo</span>
@@ -402,12 +457,10 @@
                                 </div>
                             </div>
 
-                            <!-- Botón de Solicitud Directa -->
-                            <button id="btn-completar-pedido" onclick="solicitarAsesoriaTienda()" class="w-full mt-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold hover:brightness-110 shadow-lg shadow-blue-500/25 transition-all text-sm flex items-center justify-center space-x-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                </svg>
-                                <span>Solicitar mi Asesoría de Talla</span>
+                            <!-- BOTÓN DE ENVÍO SEGURO A FIRESTORE -->
+                            <button id="btn-completar-pedido" onclick="solicitarAsesoriaTienda()" class="w-full mt-6 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-extrabold hover:brightness-110 shadow-lg shadow-blue-500/25 transition-all text-sm flex items-center justify-center space-x-2">
+                                <span id="btn-spinner" class="hidden animate-spin mr-2 h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
+                                <span id="btn-texto">Guardar en la DB de Firestore</span>
                             </button>
                         </div>
 
@@ -444,12 +497,13 @@
                 </svg>
             </div>
             <div class="space-y-2">
-                <h3 class="text-2xl font-bold text-white">¡Asesoría Solicitada!</h3>
+                <h3 class="text-2xl font-bold text-white">¡Datos Cargados en la DB!</h3>
                 <p class="text-xs text-slate-400 font-light leading-relaxed">
-                    Hemos registrado tus respuestas biomecánicas. Un asesor deportivo especializado de nuestra tienda se comunicará contigo para confirmar tus tallas de accesorios y agendar tu análisis biomecánico en sucursal.
+                    Tus respuestas de hábitos deportivos, perfil biomecánico, historial físico y cotización han sido cargados con éxito en la base de datos segura de Firestore.
                 </p>
             </div>
             <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 text-left text-xs text-slate-300 space-y-1">
+                <div><strong>ID de Documento:</strong> <span id="m-db-id" class="text-blue-400 font-mono">--</span></div>
                 <div><strong>Deportista:</strong> <span id="m-nombre">--</span></div>
                 <div><strong>Contacto:</strong> <span id="m-telefono">--</span></div>
                 <div><strong>Correo:</strong> <span id="m-correo">--</span></div>
@@ -471,17 +525,87 @@
             <div class="flex space-x-6 text-xs text-slate-400">
                 <span>Tu salud es nuestro principal objetivo</span>
                 <span class="hidden md:inline">|</span>
-                <span>Promoviendo la vida sana y el confort deportivo</span>
+                <span>Conexión cifrada a Firestore</span>
             </div>
         </div>
     </footer>
 
-    <!-- Lógica de Negocio y Sistema de Pasos en JavaScript -->
-    <script>
-        // Variables globales del carrito simulado de accesorios
+    <!-- Lógica de Negocio, Sistema de Pasos & Integración de Firebase Firestore SDK v11 -->
+    <script type="module">
+        // Importación de módulos SDK requeridos
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Configuración oficial de Firebase del usuario
+        const firebaseConfig = {
+            apiKey: "AIzaSyADRPRiunFGPsw8xJi0da7yw0NB5Ycibv0",
+            authDomain: "accesorios-deportivos-7bd4c.firebaseapp.com",
+            projectId: "accesorios-deportivos-7bd4c",
+            storageBucket: "accesorios-deportivos-7bd4c.firebasestorage.app",
+            messagingSenderId: "648142597470",
+            appId: "1:648142597470:web:b8148dcdaac99baa5d73cf"
+        };
+
+        // Resolución dinámica del ID del aplicativo (Cumpliendo Regla 1)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'accesorios-deportivos-7bd4c';
+
+        // Inicialización de Servicios Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+
+        // Función para mostrar Toast flotante de estado
+        function showToast(icon, message, duration = 3000) {
+            const toast = document.getElementById('db-toast');
+            const tIcon = document.getElementById('toast-icon');
+            const tMsg = document.getElementById('toast-message');
+            
+            if (!toast) return;
+            
+            tIcon.innerText = icon;
+            tMsg.innerText = message;
+            
+            // Animación de entrada
+            toast.classList.remove('opacity-0', 'translate-x-80');
+            toast.classList.add('opacity-100', 'translate-x-0');
+            
+            setTimeout(() => {
+                // Animación de salida
+                toast.classList.remove('opacity-100', 'translate-x-0');
+                toast.classList.add('opacity-0', 'translate-x-80');
+            }, duration);
+        }
+
+        // Regla 3: Autenticación obligatoria antes de cualquier consulta/escritura
+        const initAuth = async () => {
+            try {
+                showToast("📡", "Conectando al servidor...");
+                await signInAnonymously(auth);
+            } catch (error) {
+                console.error("Error en autenticación anónima:", error);
+                showToast("❌", "Error de conexión segura.");
+            }
+        };
+
+        // Escucha del estado de autenticación
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                console.log("Sesión activa segura (UID):", user.uid);
+                showToast("🔌", "Conexión a Firestore Establecida");
+            }
+        });
+
+        // Lanzar autenticación al iniciar
+        initAuth();
+
+        // Variables globales del carrito de accesorios
         let carrito = [];
 
-        // Base de Datos de Productos de la Tienda por Perfil de Deportista
+        // Base de Datos estática de Productos para Recomendación Biomecánica
         const catalogoProductos = {
             'runner': [
                 { id: 'run-1', nombre: 'Zapatillas Pro Impulse 5', categoria: 'Calzado', precio: 159000, desc: 'Amortiguación reactiva de nitrógeno, ideales para asfalto.', icon: '👟' },
@@ -505,17 +629,34 @@
             ]
         };
 
+        // Función dinámica para mostrar/ocultar los campos según el Toggle del Historial
+        function toggleHistorialCampos(mostrar) {
+            const divCual = document.getElementById('contenedor-deporte-cual');
+            const divTiempo = document.getElementById('contenedor-deporte-tiempo');
+            
+            if (!divCual || !divTiempo) return;
+
+            if (mostrar) {
+                divCual.classList.remove('opacity-40', 'pointer-events-none');
+                divTiempo.classList.remove('opacity-40', 'pointer-events-none');
+                document.getElementById('historial-deporte-cual').disabled = false;
+                document.getElementById('historial-deporte-tiempo').disabled = false;
+            } else {
+                divCual.classList.add('opacity-40', 'pointer-events-none');
+                divTiempo.classList.add('opacity-40', 'pointer-events-none');
+                document.getElementById('historial-deporte-cual').disabled = true;
+                document.getElementById('historial-deporte-tiempo').disabled = true;
+            }
+        }
+
         // Sistema de navegación dinámica de pasos
         function cambiarPaso(pasoId) {
-            // Ocultar todas las secciones
             document.getElementById('paso-cuestionario').classList.add('hidden');
             document.getElementById('paso-diagnostico').classList.add('hidden');
             document.getElementById('paso-tienda').classList.add('hidden');
 
-            // Mostrar la seleccionada
             document.getElementById(pasoId).classList.remove('hidden');
 
-            // Actualizar el visualizador de progreso
             const b1 = document.getElementById('badge-p1');
             const b2 = document.getElementById('badge-p2');
             const b3 = document.getElementById('badge-p3');
@@ -523,7 +664,6 @@
             const l2 = document.getElementById('line-p2');
             const text = document.getElementById('txt-progreso');
 
-            // Resetear estilos base
             [b1, b2, b3].forEach(b => {
                 b.className = "w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs bg-slate-800 text-slate-400";
             });
@@ -546,7 +686,6 @@
                 l2.className = "w-8 h-0.5 bg-emerald-500";
                 text.innerText = "Paso 3: Tienda Deportiva";
                 
-                // Desplazarse al inicio de la tienda
                 const elTienda = document.getElementById('paso-tienda');
                 if (elTienda) {
                     elTienda.scrollIntoView({ behavior: 'smooth' });
@@ -556,12 +695,16 @@
 
         // Procesar las respuestas del cuestionario interactivo
         function procesarRespuestas() {
-            // 1. Obtener datos personales del usuario
             const nombre = document.getElementById('usr-nombre').value.trim() || 'Deportista';
             const telefono = document.getElementById('usr-telefono').value.trim() || 'No provisto';
             const correo = document.getElementById('usr-correo').value.trim() || 'No provisto';
             
-            // Obtener el perfil del deportista seleccionado
+            // Datos del historial deportivo anterior
+            const practicoDeporteAntes = document.querySelector('input[name="practico-deporte-antes"]:checked').value;
+            const deportePracticado = document.getElementById('historial-deporte-cual').value.trim() || 'ninguno';
+            const tiempoPracticadoSelect = document.getElementById('historial-deporte-tiempo');
+            const tiempoPracticadoTexto = tiempoPracticadoSelect.options[tiempoPracticadoSelect.selectedIndex].text;
+
             const selectPerfil = document.querySelector('input[name="perfil-deportista"]:checked');
             const perfilVal = selectPerfil ? selectPerfil.value : 'runner';
 
@@ -572,7 +715,6 @@
             const rozaduras = document.getElementById('molestia-rozaduras').checked;
             const movilidad = document.getElementById('molestia-movilidad').checked;
 
-            // Mapeo de nombres legibles para perfiles
             const perfilesNombres = {
                 'runner': 'Runner de Asfalto',
                 'fitness': 'Guerrero de Fitness',
@@ -581,7 +723,6 @@
             };
             const perfilNombreLegible = perfilesNombres[perfilVal] || 'Deportista';
 
-            // Mapeo de nombres legibles para temas deportivos
             const temasNombres = {
                 'running': 'Running y Resistencia Cardiovascular',
                 'fitness': 'Entrenamiento de Fuerza y Fitness',
@@ -590,12 +731,10 @@
             };
             const temaNombreLegible = temasNombres[temaDeportivo] || 'Disciplina de Entrenamiento';
 
-            // Actualizar títulos del diagnóstico
             document.getElementById('diagnostico-titulo').innerText = `Reporte de Bienestar para ${nombre}`;
             document.getElementById('label-perfil-deporte').innerText = perfilNombreLegible;
             document.getElementById('diagnostico-footer-txt').innerText = `Hola ${nombre}, al comprender la importancia de tus actividades enfocadas en ${temaNombreLegible} como ${perfilNombreLegible}, te ayudaremos a encontrar tu equipamiento idóneo en nuestra sucursal (Contacto registrado: ${telefono} | ${correo}).`;
 
-            // 2. Construir reporte dinámico para DEPORTE adaptado a los 4 perfiles
             let reporteDeporteHtml = "";
             let clinicoTxt = "";
 
@@ -614,9 +753,9 @@
             } else if (perfilVal === 'trail') {
                 reporteDeporteHtml = `
                     <p>Hola <strong>${nombre}</strong>, como <strong>Explorador de Trail</strong>, te enfrentas a terrenos irregulares, pendientes de gran elevación y climas inestables.</p>
-                    <p>La actividad en montaña desafía tu propiocepción y balance neuromuscular. Tus tobillos y articulaciones lumbares requieren calzado con suelas de tracción multidireccional extrema y soporte lateral reforzado para evitar esguinces severos en terrenos húmedos o rocosos.</p>
+                    <p>La actividad en montaña desafía tu propiocepción y balance neuromuscular. Tus tobillos y articulaciones lumbares requieren calzado con suelas de tracción multidireccional extrema y soporte lateral profesional para evitar esguinces severos en terrenos de montaña húmedos.</p>
                 `;
-                clinicoTxt = "El trailrunning de montaña entrena de manera única la resistencia adaptativa, reforzando los ligamentos colaterales mediante terreno variable.";
+                clinicoTxt = "El trailrunning entrena de manera única la resistencia adaptativa, reforzando los ligamentos mediante terreno variable.";
             } else if (perfilVal === 'pro') {
                 reporteDeporteHtml = `
                     <p>Hola <strong>${nombre}</strong>, tu perfil de <strong>Atleta de Élite</strong> denota un altísimo nivel de exigencia donde cada milisegundo o gramo de peso cuenta en tus competencias.</p>
@@ -625,12 +764,27 @@
                 clinicoTxt = "Los deportistas de competición requieren un monitoreo estricto de la variabilidad de la frecuencia cardíaca (HRV) para mitigar el sobreentrenamiento.";
             }
 
-            // Adaptación de frecuencia cardíaca/rutina al diagnóstico general
-            if (frecuencia === 'baja') {
-                reporteDeporteHtml += `<p class="mt-2 text-yellow-400 font-medium">⚠️ Alerta: Tu frecuencia de entrenamiento actual es baja. Te recomendamos transicionar gradualmente para evitar lesiones biomecánicas.</p>`;
+            // Inserción del análisis de Memoria Muscular
+            if (practicoDeporteAntes === 'si') {
+                reporteDeporteHtml += `
+                    <div class="mt-4 p-4 rounded-xl bg-cyan-950/40 border border-cyan-500/20 text-xs">
+                        <span class="text-cyan-400 font-bold block mb-1">🧬 Ventaja Biomecánica: Memoria Muscular Detectada</span>
+                        <p class="text-slate-300 font-light leading-relaxed">Tu historial practicando <strong>${deportePracticado}</strong> durante un periodo de <strong>${tiempoPracticadoTexto}</strong> significa que posees adaptaciones fisiológicas y neuromusculares previas en estado latente. Tu curva de adaptación de tendones y capilares será mucho más veloz, facilitando una rápida asimilación de cargas.</p>
+                    </div>
+                `;
+            } else {
+                reporteDeporteHtml += `
+                    <div class="mt-4 p-4 rounded-xl bg-amber-950/40 border border-amber-500/20 text-xs">
+                        <span class="text-amber-400 font-bold block mb-1">🌱 Fisiología Limpia: Inicio desde Cero</span>
+                        <p class="text-slate-300 font-light leading-relaxed">Al no contar con antecedentes deportivos significativos, tus articulaciones, ligamentos y cartílagos requieren un periodo de fortalecimiento progresivo de 6 a 8 semanas. Te sugerimos calzado técnico de máxima absorción para mitigar picos de sobreesfuerzo óseo inicial.</p>
+                    </div>
+                `;
             }
 
-            // 3. Construir reporte dinámico para COMODIDAD
+            if (frecuencia === 'baja') {
+                reporteDeporteHtml += `<p class="mt-2 text-yellow-400 font-medium text-xs">⚠️ Alerta: Tu frecuencia de entrenamiento actual es baja. Te recomendamos transicionar gradualmente para evitar lesiones biomecánicas.</p>`;
+            }
+
             let reporteComodidadHtml = "";
             let consejoTxt = "";
 
@@ -656,13 +810,11 @@
                 consejoTxt = "El equipamiento adecuado actúa como una extensión de tu sistema musculoesquelético. Sigue seleccionando accesorios de alta gama técnica.";
             }
 
-            // Inyectar en el HTML del Paso 2
             document.getElementById('diagnostico-deporte').innerHTML = reporteDeporteHtml;
             document.getElementById('deporte-clinico-txt').innerText = clinicoTxt;
             document.getElementById('diagnostico-comodidad').innerHTML = reporteComodidadHtml;
             document.getElementById('comodidad-consejo-txt').innerText = consejoTxt;
 
-            // Configurar productos dinámicos de la tienda basados en el perfil
             const spanPerfil = document.getElementById('span-perfil-usuario');
             if (spanPerfil) spanPerfil.innerText = perfilNombreLegible;
 
@@ -670,15 +822,10 @@
             if (spanDisciplina) spanDisciplina.innerText = temaNombreLegible;
 
             montarCatalogoProductos(perfilVal);
-
-            // Avanzar al paso del diagnóstico
             cambiarPaso('paso-diagnostico');
         }
 
-
-        // --- LÓGICA DE TIENDA Y CATÁLOGO DE PRODUCTOS RECOMENDADOS ---
-
-        // Función para renderizar los productos recomendados según el perfil
+        // Renderizar los productos recomendados según el perfil
         function montarCatalogoProductos(perfil) {
             const grid = document.getElementById('grid-productos-tienda');
             if (!grid) return;
@@ -717,7 +864,6 @@
 
         // Agregar un accesorio deportivo al listado/carrito de cotización
         function agregarAlPlan(id, nombre, precio) {
-            // Validar si ya está en la cotización
             const existe = carrito.find(item => item.id === id);
             if (existe) {
                 existe.cant += 1;
@@ -773,15 +919,41 @@
             document.getElementById('cart-total').innerText = `$${subtotal.toLocaleString('es-CO')}`;
         }
 
-        // Simulación de envío del plan de entrenamiento
-        function solicitarAsesoriaTienda() {
-            // Verificar datos del usuario
-            const nombre = document.getElementById('usr-nombre').value.trim() || 'Deportista';
+        // Envío del plan de entrenamiento real a Firebase Firestore (Reglas 1, 2 y 3)
+        async function solicitarAsesoriaTienda() {
+            const btnCompletar = document.getElementById('btn-completar-pedido');
+            const spinner = document.getElementById('btn-spinner');
+            const btnTxt = document.getElementById('btn-texto');
+
+            // Regla 3: Auth Before Queries
+            if (!currentUser) {
+                showToast("📡", "Conectando al servidor...");
+                await initAuth();
+                if (!currentUser) {
+                    showToast("❌", "Conexión rechazada.");
+                    return;
+                }
+            }
+
+            const nombre = document.getElementById('usr-nombre').value.trim() || 'Deportista Anónimo';
             const telefono = document.getElementById('usr-telefono').value.trim() || 'No provisto';
             const correo = document.getElementById('usr-correo').value.trim() || 'No provisto';
 
+            // Datos del historial deportivo anterior
+            const practicoDeporteAntes = document.querySelector('input[name="practico-deporte-antes"]:checked').value;
+            const deportePracticado = document.getElementById('historial-deporte-cual').value.trim() || 'Ninguno';
+            const tiempoPracticadoSelect = document.getElementById('historial-deporte-tiempo');
+            const tiempoPracticadoTexto = tiempoPracticadoSelect.options[tiempoPracticadoSelect.selectedIndex].text;
+
             const selectPerfil = document.querySelector('input[name="perfil-deportista"]:checked');
             const perfilVal = selectPerfil ? selectPerfil.value : 'runner';
+
+            const frecuencia = document.querySelector('input[name="frecuencia"]:checked').value;
+            const temaDeportivo = document.querySelector('input[name="tema-deportivo"]:checked').value;
+            
+            const dolorArticular = document.getElementById('molestia-articular').checked;
+            const rozaduras = document.getElementById('molestia-rozaduras').checked;
+            const movilidad = document.getElementById('molestia-movilidad').checked;
 
             const perfilesNombres = {
                 'runner': 'Runner de Asfalto',
@@ -790,26 +962,85 @@
                 'pro': 'Atleta de Élite'
             };
 
-            // Inyectar en el Modal
-            document.getElementById('m-nombre').innerText = nombre;
-            document.getElementById('m-telefono').innerText = telefono;
-            document.getElementById('m-correo').innerText = correo;
-            document.getElementById('m-perfil').innerText = perfilesNombres[perfilVal] || 'Deportista';
+            // Mostrar estado de carga en el botón
+            if (btnCompletar) btnCompletar.disabled = true;
+            if (spinner) spinner.classList.remove('hidden');
+            if (btnTxt) btnTxt.innerText = "Conectando con Firestore...";
 
-            // Mostrar Modal
-            document.getElementById('modal-exito').classList.remove('hidden');
+            showToast("💾", "Guardando datos en la DB...");
+
+            try {
+                // Regla de Rutas 1: Guardamos en la subcolección del usuario autenticado de forma limpia
+                const userLeadsCollection = collection(db, 'artifacts', appId, 'users', currentUser.uid, 'asesorias');
+                
+                // Estructura de guardado estructurado
+                const nuevoRegistro = {
+                    nombre,
+                    telefono,
+                    correo,
+                    historialDeportivo: {
+                        practicoAntes: practicoDeporteAntes,
+                        deportes: practicoDeporteAntes === 'si' ? deportePracticado : 'Ninguno',
+                        duracionTotal: practicoDeporteAntes === 'si' ? tiempoPracticadoTexto : 'No aplica'
+                    },
+                    perfil: perfilVal,
+                    frecuencia,
+                    temaDeportivo,
+                    molestias: {
+                        articular: dolorArticular,
+                        rozaduras: rozaduras,
+                        movilidad: movilidad
+                    },
+                    carrito: carrito,
+                    creadoEl: new Date().toISOString()
+                };
+
+                // Guardado exitoso en DB
+                const docRef = await addDoc(userLeadsCollection, nuevoRegistro);
+                console.log("Documento guardado con ID en Firestore: ", docRef.id);
+
+                showToast("✅", "¡Datos cargados en la DB!");
+
+                // Configurar detalles del Modal de Éxito
+                document.getElementById('m-db-id').innerText = docRef.id;
+                document.getElementById('m-nombre').innerText = nombre;
+                document.getElementById('m-telefono').innerText = telefono;
+                document.getElementById('m-correo').innerText = correo;
+                document.getElementById('m-perfil').innerText = perfilesNombres[perfilVal] || 'Deportista';
+
+                // Mostrar Modal de Éxito
+                document.getElementById('modal-exito').classList.remove('hidden');
+
+            } catch (error) {
+                console.error("Error al registrar en Firestore:", error);
+                showToast("❌", "Error al cargar datos en la DB.");
+            } finally {
+                // Restaurar estado del botón
+                if (btnCompletar) btnCompletar.disabled = false;
+                if (spinner) spinner.classList.add('hidden');
+                if (btnTxt) btnTxt.innerText = "Guardar en la DB de Firestore";
+            }
         }
 
+        // Limpieza y reinicio
         function cerrarModalExito() {
             document.getElementById('modal-exito').classList.add('hidden');
-            // Resetear el carrito tras el pedido
             carrito = [];
             actualizarCarritoUI();
             cambiarPaso('paso-cuestionario');
         }
+
+        // Exponer funciones globales al objeto 'window' para no romper eventos onclick en el HTML
+        window.cambiarPaso = cambiarPaso;
+        window.toggleHistorialCampos = toggleHistorialCampos;
+        window.procesarRespuestas = procesarRespuestas;
+        window.agregarAlPlan = agregarAlPlan;
+        window.quitarDelPlan = quitarDelPlan;
+        window.solicitarAsesoriaTienda = solicitarAsesoriaTienda;
+        window.cerrarModalExito = cerrarModalExito;
+
     </script>
 </body>
 </html>
-    </script>
 </body>
 </html>
