@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PowerSport - Rendimiento, Confort y Respaldo Solar</title>
+    <title>PowerSport - Rendimiento, Confort y Accesorios de Alto Nivel</title>
     <!-- Tailwind CSS para diseño moderno y responsive -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts para tipografía premium -->
@@ -16,20 +16,6 @@
         h1, h2, h3, h4, .font-outfit {
             font-family: 'Outfit', sans-serif;
         }
-        /* Animaciones para el flujo de energía híbrido */
-        @keyframes dash {
-            to {
-                stroke-dashoffset: -40;
-            }
-        }
-        .flow-line {
-            stroke-dasharray: 8;
-            animation: dash 2s linear infinite;
-        }
-        .flow-line-fast {
-            stroke-dasharray: 6;
-            animation: dash 1s linear infinite;
-        }
         .gradient-text {
             background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
             -webkit-background-clip: text;
@@ -37,15 +23,6 @@
         }
         .card-glow {
             box-shadow: 0 0 25px -5px rgba(59, 130, 246, 0.15);
-        }
-        /* Ocultar flechas de inputs numéricos */
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        input[type=number] {
-            -moz-appearance: textfield;
         }
     </style>
 </head>
@@ -62,13 +39,13 @@
                 </div>
                 <div>
                     <span class="text-xl font-extrabold tracking-tight h1 text-white">Power<span class="text-blue-400">Sport</span></span>
-                    <span class="block text-[10px] text-slate-400 tracking-wider uppercase font-semibold">Accesorios & Tecnología de Respaldo</span>
+                    <span class="block text-[10px] text-slate-400 tracking-wider uppercase font-semibold">Tienda de Accesorios Deportivos</span>
                 </div>
             </div>
             <nav class="hidden md:flex space-x-6 text-sm font-medium">
-                <button onclick="cambiarPaso('paso-cuestionario')" class="text-slate-300 hover:text-blue-400 transition-colors">1. Evaluación de Bienestar</button>
+                <button onclick="cambiarPaso('paso-cuestionario')" class="text-slate-300 hover:text-blue-400 transition-colors">1. Registro y Perfil</button>
                 <button onclick="cambiarPaso('paso-diagnostico')" class="text-slate-300 hover:text-blue-400 transition-colors">2. Tu Diagnóstico</button>
-                <button onclick="cambiarPaso('paso-calculadora')" class="text-slate-300 hover:text-blue-400 transition-colors bg-blue-950/40 border border-blue-500/30 px-3.5 py-1.5 rounded-lg">3. Tienda Deportiva</button>
+                <button onclick="cambiarPaso('paso-tienda')" class="text-slate-300 hover:text-blue-400 transition-colors bg-blue-950/40 border border-blue-500/30 px-3.5 py-1.5 rounded-lg">3. Tienda Deportiva</button>
             </nav>
         </div>
     </header>
@@ -81,18 +58,18 @@
                 <div class="grid lg:grid-cols-12 gap-8 items-center">
                     <div class="lg:col-span-8 space-y-4">
                         <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
-                            Equipamiento Inteligente & Operación Continua
+                            Equipamiento Biomecánico & Alto Confort
                         </span>
                         <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-none text-white">
                             Tu Bienestar es Nuestro <span class="gradient-text">Motor Deportivo</span>
                         </h1>
                         <p class="text-sm sm:text-base text-slate-300 max-w-2xl font-light">
-                            Queremos entender tu relación con el deporte y la importancia de tu confort físico. Responde este breve cuestionario para desbloquear nuestro análisis personalizado y configurar el sistema de respaldo híbrido MPPT de la tienda de accesorios.
+                            Queremos entender tu relación con el deporte y la importancia de tu confort físico. Responde este breve cuestionario para desbloquear nuestro análisis personalizado y acceder al recomendador de accesorios deportivos ideal para tu cuerpo.
                         </p>
                     </div>
                     <div class="lg:col-span-4 flex justify-center lg:justify-end">
                         <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 text-center w-full max-w-xs">
-                            <span class="text-xs text-slate-400 block uppercase font-bold tracking-widest">Progreso del Test</span>
+                            <span class="text-xs text-slate-400 block uppercase font-bold tracking-widest">Progreso de Selección</span>
                             <div class="flex items-center justify-center space-x-2 mt-2">
                                 <span id="badge-p1" class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs bg-blue-500 text-slate-950">1</span>
                                 <div class="w-8 h-0.5 bg-slate-800" id="line-p1"></div>
@@ -100,7 +77,7 @@
                                 <div class="w-8 h-0.5 bg-slate-800" id="line-p2"></div>
                                 <span id="badge-p3" class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs bg-slate-800 text-slate-400">3</span>
                             </div>
-                            <span id="txt-progreso" class="text-xs text-blue-400 font-semibold mt-2 block">Paso 1: Cuestionario de Hábitos</span>
+                            <span id="txt-progreso" class="text-xs text-blue-400 font-semibold mt-2 block">Paso 1: Datos y Cuestionario</span>
                         </div>
                     </div>
                 </div>
@@ -110,16 +87,94 @@
         <!-- SECCIÓN DE PASOS CON CONTENEDOR CENTRAL -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             
-            <!-- PASO 1: CUESTIONARIO INTERACTIVO (PREGUNTAS DE PARÁMETROS) -->
+            <!-- PASO 1: CUESTIONARIO INTERACTIVO (PREGUNTAS DE PARÁMETROS Y DATOS PERSONALES) -->
             <section id="paso-cuestionario" class="space-y-8">
                 <div class="text-center max-w-2xl mx-auto mb-10">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-white">Paso 1: Entendiendo tus hábitos deportivos</h2>
-                    <p class="text-slate-400 text-sm mt-2 font-light">Responde con honestidad para que podamos explicarte los beneficios específicos que tu cuerpo requiere y la importancia del calzado/prendas correctas.</p>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white">Paso 1: Datos Personales y Tu Perfil Deportivo</h2>
+                    <p class="text-slate-400 text-sm mt-2 font-light">Completa tus datos de contacto y selecciona tu perfil para iniciar una experiencia de asesoramiento 100% a tu medida.</p>
                 </div>
 
-                <div class="max-w-3xl mx-auto bg-slate-900/50 p-6 sm:p-10 rounded-3xl border border-slate-800 space-y-8">
+                <div class="max-w-4xl mx-auto bg-slate-900/50 p-6 sm:p-10 rounded-3xl border border-slate-800 space-y-8">
+                    
+                    <!-- Formulario de Datos Personales -->
+                    <div class="space-y-6">
+                        <h3 class="text-lg font-bold text-blue-400 border-b border-slate-800 pb-2 flex items-center space-x-2">
+                            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                            <span>Información de Contacto</span>
+                        </h3>
+                        <div class="grid sm:grid-cols-3 gap-6">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Nombre Completo</label>
+                                <input type="text" id="usr-nombre" placeholder="Ej. Juan Pérez" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none font-medium">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Número de Teléfono</label>
+                                <input type="tel" id="usr-telefono" placeholder="Ej. +57 300 123 4567" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none font-medium">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Correo Electrónico</label>
+                                <input type="email" id="usr-correo" placeholder="ejemplo@correo.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none font-medium">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Selección de 4 Perfiles de Deportistas -->
+                    <div class="space-y-4 border-t border-slate-800/80 pt-6">
+                        <h3 class="text-lg font-bold text-purple-400 flex items-center space-x-2">
+                            <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                            <span>¿Qué tipo de deportista eres?</span>
+                        </h3>
+                        <p class="text-xs text-slate-400">Selecciona el perfil que mejor se alinee con tu modalidad de entrenamiento para personalizar el diagnóstico.</p>
+                        
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+                            <!-- Perfil 1 -->
+                            <label class="relative flex flex-col justify-between p-4 bg-slate-950 border border-slate-800 rounded-2xl cursor-pointer hover:border-blue-500/50 transition-all group">
+                                <input type="radio" name="perfil-deportista" value="runner" class="sr-only peer" checked>
+                                <div class="space-y-2">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold">R</div>
+                                    <span class="block peer-checked:text-blue-400 text-sm font-bold text-slate-200 group-hover:text-blue-400">Runner de Asfalto</span>
+                                    <span class="text-[11px] text-slate-500 block leading-tight font-light">Entrenamiento en concreto. Busca amortiguación extrema, ligereza y reactividad contra impactos articulares.</span>
+                                </div>
+                                <span class="absolute top-4 right-4 w-4 h-4 rounded-full border border-slate-700 peer-checked:border-blue-500 peer-checked:bg-blue-500"></span>
+                            </label>
+
+                            <!-- Perfil 2 -->
+                            <label class="relative flex flex-col justify-between p-4 bg-slate-950 border border-slate-800 rounded-2xl cursor-pointer hover:border-blue-500/50 transition-all group">
+                                <input type="radio" name="perfil-deportista" value="fitness" class="sr-only peer">
+                                <div class="space-y-2">
+                                    <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold">F</div>
+                                    <span class="block peer-checked:text-emerald-400 text-sm font-bold text-slate-200 group-hover:text-emerald-400">Guerrero de Fitness</span>
+                                    <span class="text-[11px] text-slate-500 block leading-tight font-light">Gimnasio, CrossFit y fuerza. Requiere calzado de suela plana y estable, agarre multidireccional y compresión.</span>
+                                </div>
+                                <span class="absolute top-4 right-4 w-4 h-4 rounded-full border border-slate-700 peer-checked:border-emerald-500 peer-checked:bg-emerald-500"></span>
+                            </label>
+
+                            <!-- Perfil 3 -->
+                            <label class="relative flex flex-col justify-between p-4 bg-slate-950 border border-slate-800 rounded-2xl cursor-pointer hover:border-blue-500/50 transition-all group">
+                                <input type="radio" name="perfil-deportista" value="trail" class="sr-only peer">
+                                <div class="space-y-2">
+                                    <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold">T</div>
+                                    <span class="block peer-checked:text-amber-400 text-sm font-bold text-slate-200 group-hover:text-amber-400">Explorador de Trail</span>
+                                    <span class="text-[11px] text-slate-500 block leading-tight font-light">Montaña, terrenos sueltos y climas extremos. Necesita tracción agresiva, soporte de tobillo e hidratación inteligente.</span>
+                                </div>
+                                <span class="absolute top-4 right-4 w-4 h-4 rounded-full border border-slate-700 peer-checked:border-amber-500 peer-checked:bg-amber-500"></span>
+                            </label>
+
+                            <!-- Perfil 4 -->
+                            <label class="relative flex flex-col justify-between p-4 bg-slate-950 border border-slate-800 rounded-2xl cursor-pointer hover:border-blue-500/50 transition-all group">
+                                <input type="radio" name="perfil-deportista" value="pro" class="sr-only peer">
+                                <div class="space-y-2">
+                                    <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold">E</div>
+                                    <span class="block peer-checked:text-purple-400 text-sm font-bold text-slate-200 group-hover:text-purple-400">Atleta de Élite</span>
+                                    <span class="text-[11px] text-slate-500 block leading-tight font-light">Competición y alto volumen. Demanda tecnologías de fibra de carbono, telas aerodinámicas y recuperación activa.</span>
+                                </div>
+                                <span class="absolute top-4 right-4 w-4 h-4 rounded-full border border-slate-700 peer-checked:border-purple-500 peer-checked:bg-purple-500"></span>
+                            </label>
+                        </div>
+                    </div>
+
                     <!-- Pregunta 1: Frecuencia -->
-                    <div class="space-y-4">
+                    <div class="space-y-4 border-t border-slate-800/80 pt-6">
                         <label class="block text-base font-bold text-slate-200">
                             1. ¿Con qué frecuencia realizas actividad física a la semana?
                         </label>
@@ -184,34 +239,35 @@
                         </div>
                     </div>
 
-                    <!-- Pregunta 3: Accesorios que priorizas -->
+                    <!-- Pregunta 3: Temas deportivos -->
                     <div class="space-y-4 border-t border-slate-800/80 pt-6">
                         <label class="block text-base font-bold text-slate-200">
-                            3. ¿Qué accesorio deportivo consideras prioritario para entrenar de forma óptima?
+                            3. ¿Qué tema deportivo o disciplina es tu prioridad de entrenamiento principal?
                         </label>
+                        <p class="text-xs text-slate-400">Selecciona el área de entrenamiento que más te apasiona o en la que te enfocas actualmente.</p>
                         <div class="grid sm:grid-cols-2 gap-4">
                             <label class="relative flex flex-col p-4 bg-slate-950 border border-slate-800 rounded-2xl cursor-pointer hover:border-blue-500/50 transition-all">
-                                <input type="radio" name="prioridad" value="calzado" class="sr-only peer" checked>
-                                <span class="peer-checked:text-blue-400 text-sm font-semibold text-slate-300">Zapatillas técnicas</span>
-                                <span class="text-xs text-slate-500 mt-1">Amortiguación, soporte dinámico y tracción estable.</span>
+                                <input type="radio" name="tema-deportivo" value="running" class="sr-only peer" checked>
+                                <span class="peer-checked:text-blue-400 text-sm font-semibold text-slate-300">Running, Atletismo y Cardio</span>
+                                <span class="text-xs text-slate-500 mt-1">Mejora de la resistencia aeróbica, velocidad e hitos de distancia sobre asfalto.</span>
                                 <span class="absolute top-4 right-4 w-4 h-4 rounded-full border border-slate-700 peer-checked:border-blue-500 peer-checked:bg-blue-500"></span>
                             </label>
                             <label class="relative flex flex-col p-4 bg-slate-950 border border-slate-800 rounded-2xl cursor-pointer hover:border-blue-500/50 transition-all">
-                                <input type="radio" name="prioridad" value="textiles" class="sr-only peer">
-                                <span class="peer-checked:text-blue-400 text-sm font-semibold text-slate-300">Prendas e indumentaria de compresión</span>
-                                <span class="text-xs text-slate-500 mt-1">Tejidos inteligentes, costuras planas y termorregulación activa.</span>
+                                <input type="radio" name="tema-deportivo" value="fitness" class="sr-only peer">
+                                <span class="peer-checked:text-blue-400 text-sm font-semibold text-slate-300">Gimnasio, Fuerza y CrossFit</span>
+                                <span class="text-xs text-slate-500 mt-1">Acondicionamiento físico general, hipertrofia muscular y entrenamiento de alta intensidad.</span>
                                 <span class="absolute top-4 right-4 w-4 h-4 rounded-full border border-slate-700 peer-checked:border-blue-500 peer-checked:bg-blue-500"></span>
                             </label>
                             <label class="relative flex flex-col p-4 bg-slate-950 border border-slate-800 rounded-2xl cursor-pointer hover:border-blue-500/50 transition-all">
-                                <input type="radio" name="prioridad" value="soportes" class="sr-only peer">
-                                <span class="peer-checked:text-blue-400 text-sm font-semibold text-slate-300">Protectores y vendajes ergonómicos</span>
-                                <span class="text-xs text-slate-500 mt-1">Muñequeras, rodilleras de estabilidad y soportes articulares.</span>
+                                <input type="radio" name="tema-deportivo" value="trail" class="sr-only peer">
+                                <span class="peer-checked:text-blue-400 text-sm font-semibold text-slate-300">Senderismo, Montañismo y Aventura</span>
+                                <span class="text-xs text-slate-500 mt-1">Exploración al aire libre, trekking técnico y desafíos en terrenos irregulares de montaña.</span>
                                 <span class="absolute top-4 right-4 w-4 h-4 rounded-full border border-slate-700 peer-checked:border-blue-500 peer-checked:bg-blue-500"></span>
                             </label>
                             <label class="relative flex flex-col p-4 bg-slate-950 border border-slate-800 rounded-2xl cursor-pointer hover:border-blue-500/50 transition-all">
-                                <input type="radio" name="prioridad" value="hidratacion" class="sr-only peer">
-                                <span class="peer-checked:text-blue-400 text-sm font-semibold text-slate-300">Monitoreo e hidratación inteligente</span>
-                                <span class="text-xs text-slate-500 mt-1">Termos aislantes, relojes deportivos y estuches ergonómicos.</span>
+                                <input type="radio" name="tema-deportivo" value="yoga" class="sr-only peer">
+                                <span class="peer-checked:text-blue-400 text-sm font-semibold text-slate-300">Yoga, Pilates y Flexibilidad</span>
+                                <span class="text-xs text-slate-500 mt-1">Control postural, estiramiento profundo, fuerza isométrica y respiración consciente.</span>
                                 <span class="absolute top-4 right-4 w-4 h-4 rounded-full border border-slate-700 peer-checked:border-blue-500 peer-checked:bg-blue-500"></span>
                             </label>
                         </div>
@@ -230,7 +286,7 @@
             <section id="paso-diagnostico" class="space-y-8 hidden">
                 <div class="text-center max-w-2xl mx-auto mb-10">
                     <span class="text-xs font-bold bg-blue-500/10 text-blue-400 px-3.5 py-1.5 rounded-full border border-blue-500/20 uppercase">Resultados del Perfil</span>
-                    <h2 class="text-2xl sm:text-3xl font-bold text-white mt-3">Tu Reporte de Bienestar y Confort</h2>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mt-3" id="diagnostico-titulo">Tu Reporte de Bienestar y Confort</h2>
                     <p class="text-slate-400 text-sm font-light">Analizamos tus respuestas para explicarte por qué debes cuidar tu cuerpo durante la actividad deportiva.</p>
                 </div>
 
@@ -244,7 +300,10 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold text-white">1. El Deporte como Pilar de tu Vida</h3>
+                        <h3 class="text-xl font-bold text-white flex justify-between items-center">
+                            <span>1. El Deporte como Pilar</span>
+                            <span id="label-perfil-deporte" class="text-xs font-semibold px-2 py-1 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 uppercase"></span>
+                        </h3>
                         
                         <!-- Diagnóstico personalizado de Salud -->
                         <div id="diagnostico-deporte" class="text-slate-300 text-sm font-light space-y-4 leading-relaxed">
@@ -281,333 +340,126 @@
                 </div>
 
                 <!-- Botones de transición al Paso 3 -->
-                <div class="pt-6 text-center space-y-3">
-                    <p class="text-xs text-slate-500">Al comprender la importancia de tus accesorios, te ayudaremos a calcular la energía requerida para tenerlos siempre disponibles en la sucursal.</p>
-                    <button onclick="cambiarPaso('paso-calculadora')" class="px-10 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold hover:brightness-110 shadow-lg shadow-blue-500/25 transition-all">
-                        Continuar a la Calculadora Solar MPPT del Local
+                <div class="pt-6 text-center space-y-3 col-span-2">
+                    <p class="text-xs text-slate-500" id="diagnostico-footer-txt">Al comprender la importancia de tus accesorios, te ayudaremos a encontrar tu equipamiento ideal en nuestra sucursal.</p>
+                    <button onclick="cambiarPaso('paso-tienda')" class="px-10 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold hover:brightness-110 shadow-lg shadow-blue-500/25 transition-all">
+                        Continuar a la Tienda Deportiva (Catálogo Personalizado)
                     </button>
                 </div>
             </section>
 
-            <!-- PASO 3: CALCULADORA DE RESPALDO MPPT -->
-            <section id="paso-calculadora" class="space-y-8 hidden">
+            <!-- PASO 3: CATÁLOGO DE ACCESORIOS RECOMENDADOS (Sustituye la Calculadora Solar) -->
+            <section id="paso-tienda" class="space-y-8 hidden">
                 <div class="text-center max-w-2xl mx-auto mb-10">
-                    <span class="text-xs font-bold bg-purple-500/10 text-purple-400 px-3.5 py-1.5 rounded-full border border-purple-500/20 uppercase">Operatividad del Local</span>
-                    <h2 class="text-2xl sm:text-3xl font-bold text-white mt-3">Planificación Energética del Local Deportivo</h2>
-                    <p class="text-slate-400 text-sm font-light">Estima el consumo de los exhibidores inteligentes de calzado y el sistema técnico de la tienda. El equipo híbrido tipo MPPT se encargará del resto.</p>
+                    <span class="text-xs font-bold bg-purple-500/10 text-purple-400 px-3.5 py-1.5 rounded-full border border-purple-500/20 uppercase">Equipamiento Exclusivo</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mt-3">Tus Accesorios Deportivos Recomendados</h2>
+                    <p class="text-slate-400 text-sm font-light">Este catálogo dinámico ha sido adaptado en tiempo real a tu perfil fisiológico y disciplina elegida para garantizar la máxima comodidad biomecánica.</p>
                 </div>
 
-                <div class="grid lg:grid-cols-12 gap-12">
-                    <!-- Formulario de Entrada - Parámetros (Columna Izquierda 7/12) -->
-                    <div class="lg:col-span-7 bg-slate-900/60 p-6 sm:p-8 rounded-3xl border border-slate-800/80 space-y-8 shadow-xl">
-                        
-                        <!-- Sección 1: Carga Eléctrica de la Tienda -->
-                        <div>
-                            <div class="flex justify-between items-center mb-6">
-                                <h3 class="text-lg font-bold text-white flex items-center space-x-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
-                                    <span>1. Inventario de Cargas de la Tienda</span>
-                                </h3>
-                                <button onclick="agregarFilaCarga()" class="text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" /></svg>
-                                    <span>Agregar Equipo</span>
-                                </button>
-                            </div>
-                            
-                            <!-- Tabla de Cargas Eléctricas -->
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-left text-sm">
-                                    <thead>
-                                        <tr class="text-slate-400 border-b border-slate-800 text-[11px] uppercase font-bold tracking-wider">
-                                            <th class="pb-3">Equipo Deportivo/Local</th>
-                                            <th class="pb-3 text-center">Cant.</th>
-                                            <th class="pb-3 text-center">Watts (W)</th>
-                                            <th class="pb-3 text-center">Horas/Día</th>
-                                            <th class="pb-3 text-right">Acción</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tabla-cargas" class="divide-y divide-slate-800/50">
-                                        <!-- Cargas por Defecto -->
-                                        <tr class="load-row" data-id="1">
-                                            <td class="py-3.5 font-medium text-slate-200">
-                                                <input type="text" class="bg-transparent border-0 focus:ring-0 focus:outline-none w-full text-slate-200 font-medium" value="Iluminación Estantería de Accesorios">
-                                            </td>
-                                            <td class="py-3.5 text-center">
-                                                <input type="number" class="qty bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg w-12 text-center py-1 text-xs font-semibold" value="8" min="1" oninput="calcularTodo()">
-                                            </td>
-                                            <td class="py-3.5 text-center">
-                                                <input type="number" class="watts bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg w-16 text-center py-1 text-xs font-semibold" value="18" min="1" oninput="calcularTodo()">
-                                            </td>
-                                            <td class="py-3.5 text-center">
-                                                <input type="number" class="hours bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg w-16 text-center py-1 text-xs font-semibold" value="10" min="1" max="24" oninput="calcularTodo()">
-                                            </td>
-                                            <td class="py-3.5 text-right">
-                                                <button onclick="eliminarFila(this)" class="text-slate-500 hover:text-red-400 transition-all p-1">
-                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr class="load-row" data-id="2">
-                                            <td class="py-3.5 font-medium text-slate-200">
-                                                <input type="text" class="bg-transparent border-0 focus:ring-0 focus:outline-none w-full text-slate-200 font-medium" value="Computador / Terminal de Cobro">
-                                            </td>
-                                            <td class="py-3.5 text-center">
-                                                <input type="number" class="qty bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg w-12 text-center py-1 text-xs font-semibold" value="2" min="1" oninput="calcularTodo()">
-                                            </td>
-                                            <td class="py-3.5 text-center">
-                                                <input type="number" class="watts bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg w-16 text-center py-1 text-xs font-semibold" value="150" min="1" oninput="calcularTodo()">
-                                            </td>
-                                            <td class="py-3.5 text-center">
-                                                <input type="number" class="hours bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg w-16 text-center py-1 text-xs font-semibold" value="9" min="1" max="24" oninput="calcularTodo()">
-                                            </td>
-                                            <td class="py-3.5 text-right">
-                                                <button onclick="eliminarFila(this)" class="text-slate-500 hover:text-red-400 transition-all p-1">
-                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr class="load-row" data-id="3">
-                                            <td class="py-3.5 font-medium text-slate-200">
-                                                <input type="text" class="bg-transparent border-0 focus:ring-0 focus:outline-none w-full text-slate-200 font-medium" value="Climatización de Exhibidores de Ropa">
-                                            </td>
-                                            <td class="py-3.5 text-center">
-                                                <input type="number" class="qty bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg w-12 text-center py-1 text-xs font-semibold" value="1" min="1" oninput="calcularTodo()">
-                                            </td>
-                                            <td class="py-3.5 text-center">
-                                                <input type="number" class="watts bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg w-16 text-center py-1 text-xs font-semibold" value="900" min="1" oninput="calcularTodo()">
-                                            </td>
-                                            <td class="py-3.5 text-center">
-                                                <input type="number" class="hours bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg w-16 text-center py-1 text-xs font-semibold" value="7" min="1" max="24" oninput="calcularTodo()">
-                                            </td>
-                                            <td class="py-3.5 text-right">
-                                                <button onclick="eliminarFila(this)" class="text-slate-500 hover:text-red-400 transition-all p-1">
-                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr class="load-row" data-id="4">
-                                            <td class="py-3.5 font-medium text-slate-200">
-                                                <input type="text" class="bg-transparent border-0 focus:ring-0 focus:outline-none w-full text-slate-200 font-medium" value="Cámaras de Seguridad de la Tienda">
-                                            </td>
-                                            <td class="py-3.5 text-center">
-                                                <input type="number" class="qty bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg w-12 text-center py-1 text-xs font-semibold" value="1" min="1" oninput="calcularTodo()">
-                                            </td>
-                                            <td class="py-3.5 text-center">
-                                                <input type="number" class="watts bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg w-16 text-center py-1 text-xs font-semibold" value="65" min="1" oninput="calcularTodo()">
-                                            </td>
-                                            <td class="py-3.5 text-center">
-                                                <input type="number" class="hours bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg w-16 text-center py-1 text-xs font-semibold" value="24" min="1" max="24" oninput="calcularTodo()">
-                                            </td>
-                                            <td class="py-3.5 text-right">
-                                                <button onclick="eliminarFila(this)" class="text-slate-500 hover:text-red-400 transition-all p-1">
-                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- Sección 2: Configuración del Sistema e Inversor Híbrido -->
-                        <div class="border-t border-slate-800/80 pt-6">
-                            <h3 class="text-lg font-bold text-white mb-6 flex items-center space-x-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
-                                <span>2. Configuración de Respaldo e Inversor Híbrido MPPT</span>
+                <div class="grid lg:grid-cols-12 gap-8">
+                    <!-- Vitrina de Accesorios Personalizados (8 de 12) -->
+                    <div class="lg:col-span-8 space-y-6">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                            <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                                <span>Accesorios Sugeridos para <span id="span-perfil-usuario" class="text-blue-400">Tu Perfil</span></span>
                             </h3>
-
-                            <div class="grid sm:grid-cols-2 gap-6">
-                                <!-- Voltaje del Banco de Baterías -->
-                                <div>
-                                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Voltaje de Operación del Banco</label>
-                                    <select id="sys-voltage" onchange="calcularTodo()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none font-medium">
-                                        <option value="12">12 Voltios (Local Chico / Puntos de Pago)</option>
-                                        <option value="24" selected>24 Voltios (Recomendado Tiendas Medianas)</option>
-                                        <option value="48">48 Voltios (Sedes Grandes / Climatización Completa)</option>
-                                    </select>
-                                </div>
-
-                                <!-- Tecnología del Banco de Baterías -->
-                                <div>
-                                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Tecnología de Baterías</label>
-                                    <select id="battery-type" onchange="calcularTodo()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none font-medium">
-                                        <option value="lithium" selected>Litio LiFePO4 (80% Descarga - Uso Industrial)</option>
-                                        <option value="gel">GEL / AGM (50% Descarga - Libre Mantenimiento)</option>
-                                        <option value="acid">Plomo-Ácido (45% Descarga - Estándar)</option>
-                                    </select>
-                                </div>
-
-                                <!-- Horas Solar Pico (HSP) -->
-                                <div>
-                                    <div class="flex justify-between items-center mb-2">
-                                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide">Insolación Regional (Horas de Sol)</label>
-                                        <span class="text-xs text-blue-400 font-bold" id="hsp-val">4.5 h</span>
-                                    </div>
-                                    <input type="range" id="hsp" min="2" max="7" step="0.1" value="4.5" oninput="actualizarSliderHsp()" class="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-blue-500">
-                                    <span class="block text-[10px] text-slate-500 mt-1">Nivel promedio de sol útil según ubicación de la sede.</span>
-                                </div>
-
-                                <!-- Días de Autonomía Requeridos -->
-                                <div>
-                                    <div class="flex justify-between items-center mb-2">
-                                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide">Autonomía Ante Cortes (Días)</label>
-                                        <span class="text-xs text-purple-400 font-bold" id="autonomy-val">1 Día</span>
-                                    </div>
-                                    <input type="range" id="autonomy" min="1" max="4" step="1" value="1" oninput="actualizarSliderAutonomy()" class="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-purple-500">
-                                    <span class="block text-[10px] text-slate-500 mt-1">Días que el local deportivo operará usando únicamente baterías.</span>
-                                </div>
-
-                                <!-- Potencia del Panel Solar Seleccionado -->
-                                <div>
-                                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Capacidad por Módulo de Carga (W)</label>
-                                    <select id="panel-wattage" onchange="calcularTodo()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none font-medium">
-                                        <option value="330">330 W (Módulos Compactos)</option>
-                                        <option value="450" selected>450 W (Módulos Alta Capacidad)</option>
-                                        <option value="550">550 W (Uso Comercial / Techos Amplios)</option>
-                                    </select>
-                                </div>
-
-                                <!-- Margen de Seguridad del Inversor -->
-                                <div>
-                                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Margen de Seguridad de Carga</label>
-                                    <select id="safety-margin" onchange="calcularTodo()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none font-medium">
-                                        <option value="1.20">20% Margen (Estándar)</option>
-                                        <option value="1.30" selected>30% Margen (Recomendado para motores de clima)</option>
-                                        <option value="1.50">50% Margen (Soportar futuras expansiones del local)</option>
-                                    </select>
-                                </div>
-                            </div>
+                            <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider bg-slate-900 border border-slate-800 px-3 py-1 rounded-lg" id="span-disciplina-actual">Running</span>
                         </div>
 
+                        <!-- Grid de Productos Recomendados Dinámicos -->
+                        <div id="grid-productos-tienda" class="grid sm:grid-cols-2 gap-6">
+                            <!-- Inyectado dinámicamente por JS según el perfil -->
+                        </div>
                     </div>
 
-                    <!-- Columna Derecha 5/12 - Visualización Interactiva & Dashboard de Resultados -->
-                    <div class="lg:col-span-5 space-y-8">
-                        
-                        <!-- Panel de Control Principal de Resultados -->
-                        <div class="bg-gradient-to-br from-slate-900 to-slate-950 p-8 rounded-3xl border border-blue-500/20 shadow-2xl relative overflow-hidden card-glow">
-                            <div class="absolute -right-16 -bottom-16 w-48 h-48 bg-blue-500/5 rounded-full filter blur-2xl"></div>
-                            
-                            <h3 class="text-xl font-extrabold text-white mb-6 border-b border-slate-800/80 pb-4 flex items-center justify-between">
-                                <span>DIMENSIONAMIENTO OPERATIVO</span>
-                                <span class="text-xs bg-blue-500 text-white font-bold px-2 py-0.5 rounded-full uppercase">MPPT Activo</span>
+                    <!-- Carrito de Cotización y Envío de Solicitud (4 de 12) -->
+                    <div class="lg:col-span-4 space-y-6">
+                        <div class="bg-gradient-to-br from-slate-900 to-slate-950 p-6 rounded-3xl border border-blue-500/20 shadow-2xl relative overflow-hidden card-glow">
+                            <h3 class="text-lg font-extrabold text-white mb-6 border-b border-slate-800/80 pb-4 flex items-center justify-between">
+                                <span>RESUMEN DE EQUIPAMIENTO</span>
+                                <span class="text-[10px] bg-blue-500 text-white font-bold px-2 py-0.5 rounded-full uppercase">Cotización</span>
                             </h3>
 
-                            <!-- Consumo Diario Calculado -->
-                            <div class="mb-6">
-                                <span class="text-[10px] text-slate-400 block uppercase font-bold tracking-wider mb-1">Consumo Diario del Local</span>
-                                <div class="flex items-baseline space-x-2">
-                                    <span class="text-4xl font-black text-white" id="res-daily-wh">0</span>
-                                    <span class="text-lg font-bold text-slate-400">Wh / día</span>
+                            <!-- Carrito vacío o lleno -->
+                            <div id="carrito-lista" class="space-y-4 max-h-[220px] overflow-y-auto pr-2 divide-y divide-slate-800">
+                                <!-- Elementos inyectados por JS -->
+                                <p class="text-xs text-slate-500 italic text-center py-6">No has agregado productos a tu plan de entrenamiento. Haz clic en "Agregar al Plan".</p>
+                            </div>
+
+                            <div class="border-t border-slate-800/80 pt-4 mt-6 space-y-3">
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="text-slate-400 font-medium">Subtotal de Accesorios:</span>
+                                    <span class="text-white font-bold" id="cart-subtotal">$0</span>
+                                </div>
+                                <div class="flex justify-between items-center text-xs">
+                                    <span class="text-slate-500 font-medium">Asesoría de Ajuste de Tallas:</span>
+                                    <span class="text-emerald-400 font-bold uppercase tracking-wider">¡Gratis!</span>
+                                </div>
+                                <div class="flex justify-between items-center text-base border-t border-dashed border-slate-800 pt-3">
+                                    <span class="text-slate-200 font-extrabold">Total Estimado:</span>
+                                    <span class="text-blue-400 font-black text-xl" id="cart-total">$0</span>
                                 </div>
                             </div>
 
-                            <!-- Métrica 1: Paneles Solares -->
-                            <div class="space-y-4 py-4 border-t border-slate-800/60">
-                                <div class="flex justify-between items-center">
-                                    <div>
-                                        <span class="text-xs text-slate-400 uppercase font-bold tracking-wider">Potencia de Entrada Requerida</span>
-                                        <div class="text-xl font-bold text-blue-400 mt-1" id="res-pv-power">0 Wp</div>
-                                    </div>
-                                    <div class="text-right">
-                                        <span class="text-xs text-slate-400 block font-semibold uppercase">Total Módulos</span>
-                                        <div class="text-xl font-bold text-white mt-1" id="res-pv-qty">0 Módulos</div>
-                                    </div>
-                                </div>
-                                <div class="w-full bg-slate-950 rounded-full h-1.5 overflow-hidden">
-                                    <div class="bg-gradient-to-r from-blue-500 to-purple-400 h-1.5 rounded-full" style="width: 100%;"></div>
-                                </div>
-                            </div>
-
-                            <!-- Métrica 2: Baterías -->
-                            <div class="space-y-4 py-4 border-t border-slate-800/60">
-                                <div class="flex justify-between items-center">
-                                    <div>
-                                        <span class="text-xs text-slate-400 uppercase font-bold tracking-wider">Capacidad de Baterías Sugerida</span>
-                                        <div class="text-xl font-bold text-purple-400 mt-1" id="res-bat-ah">0 Ah</div>
-                                    </div>
-                                    <div class="text-right">
-                                        <span class="text-xs text-slate-400 block font-semibold uppercase">Tensión Banco</span>
-                                        <div class="text-xl font-bold text-white mt-1" id="res-bat-volt">0 V</div>
-                                    </div>
-                                </div>
-                                <div class="w-full bg-slate-950 rounded-full h-1.5 overflow-hidden">
-                                    <div class="bg-gradient-to-r from-purple-500 to-pink-500 h-1.5 rounded-full" style="width: 100%;"></div>
-                                </div>
-                            </div>
-
-                            <!-- Métrica 3: Controlador MPPT & Inversor -->
-                            <div class="grid grid-cols-2 gap-4 py-4 border-t border-slate-800/60">
-                                <div>
-                                    <span class="text-[10px] text-slate-400 block uppercase font-bold tracking-wider">Regulador MPPT Estimado</span>
-                                    <div class="text-lg font-bold text-amber-400 mt-1" id="res-mppt-current">0 A</div>
-                                    <span class="text-[9px] text-slate-500 block">Corriente del sistema</span>
-                                </div>
-                                <div>
-                                    <span class="text-[10px] text-slate-400 block uppercase font-bold tracking-wider">Inversor Híbrido Requerido</span>
-                                    <div class="text-lg font-bold text-purple-400 mt-1" id="res-inv-kw">0 kW</div>
-                                    <span class="text-[9px] text-slate-500 block">Con factor seguridad</span>
-                                </div>
-                            </div>
-
-                            <!-- Advertencia Técnica Automatizada -->
-                            <div class="mt-4 p-4 rounded-xl bg-slate-950 border border-slate-800" id="tech-note-box">
-                                <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Análisis de Respaldo:</span>
-                                <p class="text-slate-300 text-xs font-light" id="tech-note">El sistema requiere configurar el inventario de cargas de la tienda.</p>
-                            </div>
-                        </div>
-
-                        <!-- Diagrama de Flujo Solar Híbrido Interactivo -->
-                        <div class="bg-slate-900/40 p-6 rounded-3xl border border-slate-800 shadow-xl">
-                            <h4 class="text-sm font-bold text-slate-300 mb-6 text-center uppercase tracking-wider">Flujo Eléctrico de Respaldo MPPT</h4>
-                            
-                            <div class="flex justify-center items-center">
-                                <svg width="280" height="240" viewBox="0 0 280 240" fill="none" class="w-full max-w-[320px]">
-                                    <!-- Captación de Techo (Top-Left) -->
-                                    <rect x="20" y="20" width="60" height="45" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
-                                    <line x1="20" y1="35" x2="80" y2="35" stroke="#334155" stroke-width="1.5"/>
-                                    <line x1="20" y1="50" x2="80" y2="50" stroke="#334155" stroke-width="1.5"/>
-                                    <line x1="40" y1="20" x2="40" y2="65" stroke="#334155" stroke-width="1.5"/>
-                                    <line x1="60" y1="20" x2="60" y2="65" stroke="#334155" stroke-width="1.5"/>
-                                    <text x="50" y="85" fill="#3b82f6" font-size="9" font-family="Outfit" font-weight="bold" text-anchor="middle">MÓDULOS</text>
-
-                                    <!-- MPPT Controlador / Inversor Híbrido (Centro) -->
-                                    <rect x="110" y="90" width="70" height="70" rx="10" fill="#0f172a" stroke="#d97706" stroke-width="2"/>
-                                    <circle cx="145" cy="120" r="15" fill="#1e293b"/>
-                                    <polygon points="145,110 137,123 143,123 142,130 152,117 146,117" fill="#d97706" />
-                                    <text x="145" y="175" fill="#d97706" font-size="9" font-family="Outfit" font-weight="bold" text-anchor="middle">MPPT HÍBRIDO</text>
-
-                                    <!-- Baterías (Bottom-Left) -->
-                                    <rect x="20" y="160" width="60" height="40" rx="6" fill="#1e293b" stroke="#a855f7" stroke-width="2"/>
-                                    <rect x="30" y="154" width="8" height="6" fill="#a855f7" rx="1"/>
-                                    <rect x="62" y="154" width="8" height="6" fill="#a855f7" rx="1"/>
-                                    <text x="50" y="215" fill="#a855f7" font-size="9" font-family="Outfit" font-weight="bold" text-anchor="middle">BATERÍAS</text>
-
-                                    <!-- Carga / Tienda Deportiva (Right) -->
-                                    <rect x="210" y="95" width="60" height="50" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
-                                    <!-- Pequeña fachada de tienda -->
-                                    <polygon points="210,105 240,95 270,105" fill="#3b82f6" />
-                                    <rect x="225" y="115" width="10" height="30" fill="#334155" />
-                                    <rect x="245" y="115" width="15" height="15" fill="#334155" />
-                                    <text x="240" y="160" fill="#3b82f6" font-size="9" font-family="Outfit" font-weight="bold" text-anchor="middle">TIENDA (Cargas)</text>
-
-                                    <!-- Flujo de líneas conductoras -->
-                                    <!-- Solar -> MPPT -->
-                                    <path d="M50,65 L50,110 L110,110" stroke="#3b82f6" stroke-width="2" fill="none" class="flow-line" />
-                                    <!-- MPPT -> Batería -->
-                                    <path d="M125,160 L125,185 L80,185" stroke="#a855f7" stroke-width="2" fill="none" class="flow-line" />
-                                    <!-- MPPT -> Cargas de la Tienda -->
-                                    <path d="M180,125 L210,125" stroke="#3b82f6" stroke-width="2" fill="none" class="flow-line-fast" />
+                            <!-- Botón de Solicitud Directa -->
+                            <button id="btn-completar-pedido" onclick="solicitarAsesoriaTienda()" class="w-full mt-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold hover:brightness-110 shadow-lg shadow-blue-500/25 transition-all text-sm flex items-center justify-center space-x-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                 </svg>
-                            </div>
-                            <span class="block text-center text-[10px] text-slate-500 mt-2">La velocidad del flujo indica conversión activa de energía mediante el controlador MPPT.</span>
+                                <span>Solicitar mi Asesoría de Talla</span>
+                            </button>
                         </div>
 
+                        <!-- Beneficio de Compra -->
+                        <div class="bg-slate-900/40 p-5 rounded-2xl border border-slate-800 space-y-3">
+                            <h4 class="text-xs font-bold text-slate-300 uppercase tracking-widest">¿Por qué comprar con asesoría personalizada?</h4>
+                            <ul class="text-xs text-slate-400 space-y-2 font-light">
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-blue-400 mt-0.5">•</span>
+                                    <span>Análisis de pisada computarizado sin costo adicional en sucursal física.</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-blue-400 mt-0.5">•</span>
+                                    <span>Acceso a marcas de calzado con espumas biomecánicas de nivel premium.</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-blue-400 mt-0.5">•</span>
+                                    <span>Garantía de confort de 30 días en prendas e indumentaria técnica.</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </section>
         </div>
     </main>
+
+    <!-- Modal de Pedido Completado -->
+    <div id="modal-exito" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-md hidden p-4">
+        <div class="bg-slate-900 border border-blue-500/30 p-8 rounded-3xl max-w-md w-full text-center space-y-6 card-glow">
+            <div class="w-16 h-16 bg-blue-500/10 text-blue-400 rounded-full flex items-center justify-center mx-auto">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">¡Asesoría Solicitada!</h3>
+                <p class="text-xs text-slate-400 font-light leading-relaxed">
+                    Hemos registrado tus respuestas biomecánicas. Un asesor deportivo especializado de nuestra tienda se comunicará contigo para confirmar tus tallas de accesorios y agendar tu análisis biomecánico en sucursal.
+                </p>
+            </div>
+            <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 text-left text-xs text-slate-300 space-y-1">
+                <div><strong>Deportista:</strong> <span id="m-nombre">--</span></div>
+                <div><strong>Contacto:</strong> <span id="m-telefono">--</span></div>
+                <div><strong>Correo:</strong> <span id="m-correo">--</span></div>
+                <div><strong>Perfil Biomecánico:</strong> <span id="m-perfil">--</span></div>
+            </div>
+            <button onclick="cerrarModalExito()" class="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold rounded-xl text-xs hover:brightness-110 transition-all">
+                Aceptar y Volver
+            </button>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-slate-950 border-t border-slate-900 py-10 mt-auto">
@@ -617,7 +469,7 @@
                 <span class="text-xs text-slate-500">© 2026 Todos los derechos reservados.</span>
             </div>
             <div class="flex space-x-6 text-xs text-slate-400">
-                <span>Optimizado para Controladores Híbridos MPPT</span>
+                <span>Tu salud es nuestro principal objetivo</span>
                 <span class="hidden md:inline">|</span>
                 <span>Promoviendo la vida sana y el confort deportivo</span>
             </div>
@@ -626,12 +478,39 @@
 
     <!-- Lógica de Negocio y Sistema de Pasos en JavaScript -->
     <script>
+        // Variables globales del carrito simulado de accesorios
+        let carrito = [];
+
+        // Base de Datos de Productos de la Tienda por Perfil de Deportista
+        const catalogoProductos = {
+            'runner': [
+                { id: 'run-1', nombre: 'Zapatillas Pro Impulse 5', categoria: 'Calzado', precio: 159000, desc: 'Amortiguación reactiva de nitrógeno, ideales para asfalto.', icon: '👟' },
+                { id: 'run-2', nombre: 'Calcetines Hidrófugos Compresión', categoria: 'Prendas', precio: 18000, desc: 'Evita rozaduras y ampollas manteniendo el pie seco.', icon: '🧦' },
+                { id: 'run-3', nombre: 'Cinturón de Hidratación Ergonómico', categoria: 'Accesorios', precio: 32000, desc: 'Ajuste elástico perfecto sin rebote para botellas de hidratación.', icon: '🎒' }
+            ],
+            'fitness': [
+                { id: 'fit-1', nombre: 'Zapatillas Flat Grip Trainer', categoria: 'Calzado', precio: 129000, desc: 'Suela plana y ultra adherente para estabilidad en sentadillas y CrossFit.', icon: '👟' },
+                { id: 'fit-2', nombre: 'Camiseta de Compresión Termorreguladora', categoria: 'Prendas', precio: 45000, desc: 'Soporte muscular de hombros con tejido de secado rápido.', icon: '👕' },
+                { id: 'fit-3', nombre: 'Muñequeras y Calleras de Alto Soporte', categoria: 'Accesorios', precio: 22000, desc: 'Protección para evitar fatiga articular y ampollas en barras de tracción.', icon: '🧤' }
+            ],
+            'trail': [
+                { id: 'trail-1', nombre: 'Zapatillas Trail Tracker Waterproof', categoria: 'Calzado', precio: 169000, desc: 'Suela con tacos multidireccionales agresivos de tracción extrema.', icon: '🥾' },
+                { id: 'trail-2', nombre: 'Chaqueta Cortavientos Ultra-Breathable', categoria: 'Prendas', precio: 75000, desc: 'Membrana impermeable de alta flexibilidad y costuras termoselladas.', icon: '🧥' },
+                { id: 'trail-3', nombre: 'Chaleco Mochila de Hidratación Trail', categoria: 'Accesorios', precio: 62000, desc: 'Capacidad de 5L con bolsillos rápidos para geles y celular.', icon: '🎒' }
+            ],
+            'pro': [
+                { id: 'pro-1', nombre: 'Zapatillas Carbon Flight Elite', categoria: 'Calzado', precio: 249000, desc: 'Placa de fibra de carbono integral para un retorno de energía máximo.', icon: '👟' },
+                { id: 'pro-2', nombre: 'Licra de Compresión de Competición', categoria: 'Prendas', precio: 58000, desc: 'Mejora del flujo sanguíneo y disminución del lactato acumulado.', icon: '🩳' },
+                { id: 'pro-3', nombre: 'Rodillo de Recuperación Vibratorio', categoria: 'Accesorios', precio: 89000, desc: 'Terapia neuromuscular autónoma para acelerar la recuperación.', icon: '⚙️' }
+            ]
+        };
+
         // Sistema de navegación dinámica de pasos
         function cambiarPaso(pasoId) {
             // Ocultar todas las secciones
             document.getElementById('paso-cuestionario').classList.add('hidden');
             document.getElementById('paso-diagnostico').classList.add('hidden');
-            document.getElementById('paso-calculadora').classList.add('hidden');
+            document.getElementById('paso-tienda').classList.add('hidden');
 
             // Mostrar la seleccionada
             document.getElementById(pasoId).classList.remove('hidden');
@@ -653,55 +532,102 @@
 
             if (pasoId === 'paso-cuestionario') {
                 b1.className = "w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs bg-blue-500 text-slate-950";
-                text.innerText = "Paso 1: Cuestionario de Hábitos";
+                text.innerText = "Paso 1: Datos y Cuestionario";
             } else if (pasoId === 'paso-diagnostico') {
                 b1.className = "w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs bg-emerald-500 text-slate-950";
                 b2.className = "w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs bg-blue-500 text-slate-950";
                 l1.className = "w-8 h-0.5 bg-emerald-500";
                 text.innerText = "Paso 2: Diagnóstico Personalizado";
-            } else if (pasoId === 'paso-calculadora') {
+            } else if (pasoId === 'paso-tienda') {
                 b1.className = "w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs bg-emerald-500 text-slate-950";
                 b2.className = "w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs bg-emerald-500 text-slate-950";
                 b3.className = "w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs bg-blue-500 text-slate-950";
                 l1.className = "w-8 h-0.5 bg-emerald-500";
                 l2.className = "w-8 h-0.5 bg-emerald-500";
                 text.innerText = "Paso 3: Tienda Deportiva";
-                // Desplazarse al inicio de la calculadora
-                document.getElementById('paso-calculadora').scrollIntoView({ behavior: 'smooth' });
+                
+                // Desplazarse al inicio de la tienda
+                const elTienda = document.getElementById('paso-tienda');
+                if (elTienda) {
+                    elTienda.scrollIntoView({ behavior: 'smooth' });
+                }
             }
         }
 
         // Procesar las respuestas del cuestionario interactivo
         function procesarRespuestas() {
-            // 1. Obtener valores seleccionados
+            // 1. Obtener datos personales del usuario
+            const nombre = document.getElementById('usr-nombre').value.trim() || 'Deportista';
+            const telefono = document.getElementById('usr-telefono').value.trim() || 'No provisto';
+            const correo = document.getElementById('usr-correo').value.trim() || 'No provisto';
+            
+            // Obtener el perfil del deportista seleccionado
+            const selectPerfil = document.querySelector('input[name="perfil-deportista"]:checked');
+            const perfilVal = selectPerfil ? selectPerfil.value : 'runner';
+
             const frecuencia = document.querySelector('input[name="frecuencia"]:checked').value;
-            const prioridad = document.querySelector('input[name="prioridad"]:checked').value;
+            const temaDeportivo = document.querySelector('input[name="tema-deportivo"]:checked').value;
             
             const dolorArticular = document.getElementById('molestia-articular').checked;
             const rozaduras = document.getElementById('molestia-rozaduras').checked;
             const movilidad = document.getElementById('molestia-movilidad').checked;
 
-            // 2. Construir reporte dinámico para DEPORTE
+            // Mapeo de nombres legibles para perfiles
+            const perfilesNombres = {
+                'runner': 'Runner de Asfalto',
+                'fitness': 'Guerrero de Fitness',
+                'trail': 'Explorador de Trail',
+                'pro': 'Atleta de Élite'
+            };
+            const perfilNombreLegible = perfilesNombres[perfilVal] || 'Deportista';
+
+            // Mapeo de nombres legibles para temas deportivos
+            const temasNombres = {
+                'running': 'Running y Resistencia Cardiovascular',
+                'fitness': 'Entrenamiento de Fuerza y Fitness',
+                'trail': 'Aventura en Montaña y Senderismo',
+                'yoga': 'Yoga, Estiramiento y Flexibilidad'
+            };
+            const temaNombreLegible = temasNombres[temaDeportivo] || 'Disciplina de Entrenamiento';
+
+            // Actualizar títulos del diagnóstico
+            document.getElementById('diagnostico-titulo').innerText = `Reporte de Bienestar para ${nombre}`;
+            document.getElementById('label-perfil-deporte').innerText = perfilNombreLegible;
+            document.getElementById('diagnostico-footer-txt').innerText = `Hola ${nombre}, al comprender la importancia de tus actividades enfocadas en ${temaNombreLegible} como ${perfilNombreLegible}, te ayudaremos a encontrar tu equipamiento idóneo en nuestra sucursal (Contacto registrado: ${telefono} | ${correo}).`;
+
+            // 2. Construir reporte dinámico para DEPORTE adaptado a los 4 perfiles
             let reporteDeporteHtml = "";
             let clinicoTxt = "";
+
+            if (perfilVal === 'runner') {
+                reporteDeporteHtml = `
+                    <p>Hola <strong>${nombre}</strong>, como <strong>Runner de Asfalto</strong>, tu cuerpo enfrenta impactos repetitivos de hasta 3 veces tu peso corporal en cada zancada sobre concreto.</p>
+                    <p>Hacer deporte de forma regular mantiene tu corazón en un volumen sistólico óptimo, fortaleciendo tus paredes ventriculares. Sin embargo, este alto impacto exige que tu calzado tenga un sistema de amortiguación reactiva avanzado (como espumas de nitrógeno inyectado) para proteger tus meniscos y ligamentos del desgaste prematuro.</p>
+                `;
+                clinicoTxt = "El running urbano mejora la densidad capilar de los músculos, optimizando de manera directa el flujo de oxígeno (VO2 Max).";
+            } else if (perfilVal === 'fitness') {
+                reporteDeporteHtml = `
+                    <p>Hola <strong>${nombre}</strong>, como <strong>Guerrero de Fitness</strong>, tus rutinas de musculación, CrossFit o entrenamientos de alta intensidad demandan una base sumamente estable.</p>
+                    <p>El ejercicio de fuerza estimula la hipertrofia miofibrilar y la salud de tus tendones. Para tu modalidad, utilizar accesorios que te garanticen un calzado plano con drop bajo es innegociable; esto previene desviaciones en tu eje lumbar al realizar sentadillas o levantamientos olímpicos.</p>
+                `;
+                clinicoTxt = "El entrenamiento de fuerza incrementa la masa metabólicamente activa, lo que regula la glucosa en sangre y previene desequilibrios hormonales.";
+            } else if (perfilVal === 'trail') {
+                reporteDeporteHtml = `
+                    <p>Hola <strong>${nombre}</strong>, como <strong>Explorador de Trail</strong>, te enfrentas a terrenos irregulares, pendientes de gran elevación y climas inestables.</p>
+                    <p>La actividad en montaña desafía tu propiocepción y balance neuromuscular. Tus tobillos y articulaciones lumbares requieren calzado con suelas de tracción multidireccional extrema y soporte lateral reforzado para evitar esguinces severos en terrenos húmedos o rocosos.</p>
+                `;
+                clinicoTxt = "El trailrunning de montaña entrena de manera única la resistencia adaptativa, reforzando los ligamentos colaterales mediante terreno variable.";
+            } else if (perfilVal === 'pro') {
+                reporteDeporteHtml = `
+                    <p>Hola <strong>${nombre}</strong>, tu perfil de <strong>Atleta de Élite</strong> denota un altísimo nivel de exigencia donde cada milisegundo o gramo de peso cuenta en tus competencias.</p>
+                    <p>Entrenar a niveles profesionales exige una tasa de regeneración mitocondrial acelerada. El uso de tecnología textil de compresión graduada es vital para acelerar el retorno venoso y disminuir la acumulación de lactato muscular posentrenamiento.</p>
+                `;
+                clinicoTxt = "Los deportistas de competición requieren un monitoreo estricto de la variabilidad de la frecuencia cardíaca (HRV) para mitigar el sobreentrenamiento.";
+            }
+
+            // Adaptación de frecuencia cardíaca/rutina al diagnóstico general
             if (frecuencia === 'baja') {
-                reporteDeporteHtml = `
-                    <p><strong>¡Es momento de activar tu motor!</strong> Al realizar poca actividad física, tu sistema cardiovascular y tu metabolismo operan a niveles mínimos de reserva. Introducir solo 15 minutos diarios de actividad física aeróbica puede reducir el riesgo de hipertensión en un 30%.</p>
-                    <p>El deporte estimula la producción de masa ósea protectora y mejora sustancialmente la plasticidad neuronal, reduciendo el riesgo de estrés crónico y depresión leve.</p>
-                `;
-                clinicoTxt = "El sedentarismo eleva la rigidez arterial. Empezar con rutinas moderadas optimiza el consumo de oxígeno máximo (VO2 Max).";
-            } else if (frecuencia === 'media') {
-                reporteDeporteHtml = `
-                    <p><strong>¡Excelente ritmo intermedio!</strong> Entrenar de 1 a 3 veces por semana mantiene tu corazón en un rango de adaptabilidad saludable. Estás liberando endorfinas y dopamina de forma constante, lo que disminuye tu cortisol periférico diario.</p>
-                    <p>Para potenciar tu rendimiento sin sobrecargar tus tendones, la constancia es clave. Alternar fuerza y resistencia muscular maximiza la quema lipídica pasiva.</p>
-                `;
-                clinicoTxt = "La actividad de 3 días semanales incrementa la sensibilidad a la insulina y previene el desgaste articular prematuro.";
-            } else {
-                reporteDeporteHtml = `
-                    <p><strong>¡Atleta de Alto Desempeño!</strong> Tu demanda física es elevada. Tu cuerpo cuenta con un sistema cardiovascular altamente desarrollado, un VO2 Max óptimo y una tasa de regeneración mitocondrial acelerada.</p>
-                    <p>Debido al constante estrés muscular mecánico, la prevención mediante accesorios ergonómicos (calzado reactivo, soportes elásticos) es fundamental para evitar microdesgarros o tendinitis crónica.</p>
-                `;
-                clinicoTxt = "El entrenamiento de alta frecuencia requiere especial cuidado en la recuperación muscular y el uso de equipo de alta amortiguación.";
+                reporteDeporteHtml += `<p class="mt-2 text-yellow-400 font-medium">⚠️ Alerta: Tu frecuencia de entrenamiento actual es baja. Te recomendamos transicionar gradualmente para evitar lesiones biomecánicas.</p>`;
             }
 
             // 3. Construir reporte dinámico para COMODIDAD
@@ -709,7 +635,7 @@
             let consejoTxt = "";
 
             if (dolorArticular || rozaduras || movilidad) {
-                reporteComodidadHtml = `<p>Tus experiencias anteriores demuestran que <strong>has estado entrenando bajo condiciones desfavorables para tu biomecánica.</strong></p>`;
+                reporteComodidadHtml = `<p>Tus experiencias anteriores demuestran que <strong>has estado entrenando bajo condiciones desfavorables para tu biomecánica de ${perfilNombreLegible}.</strong></p>`;
                 
                 if (dolorArticular) {
                     reporteComodidadHtml += `<p>• <strong>El dolor articular</strong> es el primer síntoma de un calzado fatigado o inadecuado. La falta de una mediasuela con absorción de impactos transfiere toda la energía destructiva del suelo directamente a tus rótulas, meniscos y zona lumbar.</p>`;
@@ -724,210 +650,166 @@
                 consejoTxt = "La incomodidad sabotea tu consistencia neurológica: entrenar incómodo disminuye el rendimiento mental y eleva el riesgo de lesiones severas.";
             } else {
                 reporteComodidadHtml = `
-                    <p><strong>¡Felicidades! Disfrutas de una biomecánica equilibrada.</strong> Al no presentar dolores articulares o rozaduras, tu combinación de accesorios deportivos actuales respeta tu alineación corporal.</p>
+                    <p><strong>¡Felicidades, ${nombre}! Disfrutas de una biomecánica equilibrada.</strong> Al no presentar dolores articulares o rozaduras, tu combinación de accesorios deportivos actuales respeta tu alineación corporal.</p>
                     <p>Mantener este nivel de confort físico es el secreto detrás del éxito a largo plazo. Un calzado ergonómico y prendas con costuras termoselladas reducen la carga térmica general del deportista, permitiendo entrenamientos un 25% más extensos sin fatiga prematura.</p>
                 `;
                 consejoTxt = "El equipamiento adecuado actúa como una extensión de tu sistema musculoesquelético. Sigue seleccionando accesorios de alta gama técnica.";
             }
 
-            // Inyectar en el HTML
+            // Inyectar en el HTML del Paso 2
             document.getElementById('diagnostico-deporte').innerHTML = reporteDeporteHtml;
             document.getElementById('deporte-clinico-txt').innerText = clinicoTxt;
             document.getElementById('diagnostico-comodidad').innerHTML = reporteComodidadHtml;
             document.getElementById('comodidad-consejo-txt').innerText = consejoTxt;
+
+            // Configurar productos dinámicos de la tienda basados en el perfil
+            const spanPerfil = document.getElementById('span-perfil-usuario');
+            if (spanPerfil) spanPerfil.innerText = perfilNombreLegible;
+
+            const spanDisciplina = document.getElementById('span-disciplina-actual');
+            if (spanDisciplina) spanDisciplina.innerText = temaNombreLegible;
+
+            montarCatalogoProductos(perfilVal);
 
             // Avanzar al paso del diagnóstico
             cambiarPaso('paso-diagnostico');
         }
 
 
-        // --- LÓGICA DE LA CALCULADORA TÉCNICA SOLAR MPPT ---
-        let nextRowId = 5;
+        // --- LÓGICA DE TIENDA Y CATÁLOGO DE PRODUCTOS RECOMENDADOS ---
 
-        // Función para agregar un nuevo dispositivo a la tabla de cargas
-        function agregarFilaCarga() {
-            const tbody = document.getElementById('tabla-cargas');
-            const row = document.createElement('tr');
-            row.className = 'load-row';
-            row.setAttribute('data-id', nextRowId);
-            row.innerHTML = `
-                <td class="py-3.5 font-medium text-slate-200">
-                    <input type="text" class="bg-transparent border-0 focus:ring-0 focus:outline-none w-full text-slate-200 font-medium" value="Nuevo Dispositivo">
-                </td>
-                <td class="py-3.5 text-center">
-                    <input type="number" class="qty bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg w-12 text-center py-1 text-xs font-semibold" value="1" min="1" oninput="calcularTodo()">
-                </td>
-                <td class="py-3.5 text-center">
-                    <input type="number" class="watts bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg w-16 text-center py-1 text-xs font-semibold" value="100" min="1" oninput="calcularTodo()">
-                </td>
-                <td class="py-3.5 text-center">
-                    <input type="number" class="hours bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg w-16 text-center py-1 text-xs font-semibold" value="5" min="1" max="24" oninput="calcularTodo()">
-                </td>
-                <td class="py-3.5 text-right">
-                    <button onclick="eliminarFila(this)" class="text-slate-500 hover:text-red-400 transition-all p-1">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                    </button>
-                </td>
-            `;
-            tbody.appendChild(row);
-            nextRowId++;
-            calcularTodo();
+        // Función para renderizar los productos recomendados según el perfil
+        function montarCatalogoProductos(perfil) {
+            const grid = document.getElementById('grid-productos-tienda');
+            if (!grid) return;
+
+            grid.innerHTML = "";
+            const productos = catalogoProductos[perfil] || catalogoProductos['runner'];
+
+            productos.forEach(prod => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800/85 hover:border-blue-500/30 p-5 rounded-2xl flex flex-col justify-between transition-all duration-300 group relative";
+                card.innerHTML = `
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-3xl">${prod.icon}</span>
+                            <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded-md bg-slate-950 text-slate-400 border border-slate-800">${prod.categoria}</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-200 text-base group-hover:text-blue-400 transition-colors">${prod.nombre}</h4>
+                            <p class="text-xs text-slate-400 mt-1 font-light leading-relaxed">${prod.desc}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-slate-800/60 pt-4 mt-5">
+                        <div class="text-left">
+                            <span class="text-[9px] text-slate-500 block uppercase font-bold">Precio Sede</span>
+                            <span class="text-base font-extrabold text-white">$${prod.precio.toLocaleString('es-CO')}</span>
+                        </div>
+                        <button onclick="agregarAlPlan('${prod.id}', '${prod.nombre}', ${prod.precio})" class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500 hover:text-slate-950 px-3 py-2 rounded-lg font-bold transition-all flex items-center space-x-1">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" /></svg>
+                            <span>Agregar al Plan</span>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
         }
 
-        // Eliminar fila de consumo
-        function eliminarFila(btn) {
-            const row = btn.closest('tr');
-            row.remove();
-            calcularTodo();
-        }
-
-        // Actualizar etiqueta del slider HSP
-        function actualizarSliderHsp() {
-            const hsp = parseFloat(document.getElementById('hsp').value);
-            const hspValEl = document.getElementById('hsp-val');
-            if (hspValEl) {
-                hspValEl.innerText = hsp.toFixed(1) + " h";
+        // Agregar un accesorio deportivo al listado/carrito de cotización
+        function agregarAlPlan(id, nombre, precio) {
+            // Validar si ya está en la cotización
+            const existe = carrito.find(item => item.id === id);
+            if (existe) {
+                existe.cant += 1;
+            } else {
+                carrito.push({ id, nombre, precio, cant: 1 });
             }
-            calcularTodo();
+            actualizarCarritoUI();
         }
 
-        // Actualizar etiqueta del slider de autonomía
-        function actualizarSliderAutonomy() {
-            const days = parseInt(document.getElementById('autonomy').value);
-            const autonomyValEl = document.getElementById('autonomy-val');
-            if (autonomyValEl) {
-                autonomyValEl.innerText = days === 1 ? "1 Día" : `${days} Días`;
+        // Quitar un accesorio deportivo del listado
+        function quitarDelPlan(id) {
+            carrito = carrito.filter(item => item.id !== id);
+            actualizarCarritoUI();
+        }
+
+        // Refrescar el estado visual del carrito y total
+        function actualizarCarritoUI() {
+            const lista = document.getElementById('carrito-lista');
+            if (!lista) return;
+
+            if (carrito.length === 0) {
+                lista.innerHTML = `<p class="text-xs text-slate-500 italic text-center py-6">No has agregado productos a tu plan de entrenamiento. Haz clic en "Agregar al Plan".</p>`;
+                document.getElementById('cart-subtotal').innerText = "$0";
+                document.getElementById('cart-total').innerText = "$0";
+                return;
             }
-            calcularTodo();
-        }
 
-        // Función Principal de Ingeniería Solar para Respaldo MPPT
-        function calcularTodo() {
-            const rows = document.querySelectorAll('.load-row');
-            let totalDailyWh = 0;
-            let totalPeakWatts = 0; // Potencia máxima coincidente
+            lista.innerHTML = "";
+            let subtotal = 0;
 
-            // 1. Calcular consumos sumados de la tienda
-            rows.forEach(row => {
-                const qtyInput = row.querySelector('.qty');
-                const wattsInput = row.querySelector('.watts');
-                const hoursInput = row.querySelector('.hours');
+            carrito.forEach(item => {
+                const itemTotal = item.precio * item.cant;
+                subtotal += itemTotal;
 
-                if (qtyInput && wattsInput && hoursInput) {
-                    const qty = parseInt(qtyInput.value) || 0;
-                    const watts = parseInt(wattsInput.value) || 0;
-                    const hours = parseFloat(hoursInput.value) || 0;
-
-                    const dailyWh = qty * watts * hours;
-                    totalDailyWh += dailyWh;
-                    totalPeakWatts += (qty * watts);
-                }
+                const row = document.createElement('div');
+                row.className = "flex items-center justify-between py-3";
+                row.innerHTML = `
+                    <div class="space-y-0.5 text-left max-w-[65%]">
+                        <span class="text-xs font-bold text-slate-200 block truncate">${item.nombre}</span>
+                        <span class="text-[10px] text-slate-500 block">Cant. ${item.cant} x $${item.precio.toLocaleString('es-CO')}</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-xs font-bold text-slate-300">$${itemTotal.toLocaleString('es-CO')}</span>
+                        <button onclick="quitarDelPlan('${item.id}')" class="text-slate-500 hover:text-red-400 transition-colors">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                        </button>
+                    </div>
+                `;
+                lista.appendChild(row);
             });
 
-            // Actualizar vistas inmediatas del consumo de forma segura (con comprobación de existencia)
-            const resDailyWhEl = document.getElementById('res-daily-wh');
-            if (resDailyWhEl) {
-                resDailyWhEl.innerText = totalDailyWh.toLocaleString('es-CO');
-            }
-
-            const quickTotalLoadEl = document.getElementById('quick-total-load');
-            if (quickTotalLoadEl) {
-                quickTotalLoadEl.innerText = `${totalDailyWh.toLocaleString('es-CO')} Wh/Día`;
-            }
-
-            // Parámetros de entrada de configuración técnica
-            const sysVoltageEl = document.getElementById('sys-voltage');
-            const batteryTypeEl = document.getElementById('battery-type');
-            const hspEl = document.getElementById('hsp');
-            const autonomyEl = document.getElementById('autonomy');
-            const panelWattageEl = document.getElementById('panel-wattage');
-            const safetyMarginEl = document.getElementById('safety-margin');
-
-            if (!sysVoltageEl || !batteryTypeEl || !hspEl || !autonomyEl || !panelWattageEl || !safetyMarginEl) {
-                return; // Guardrail en caso de que aún no estén montados todos los inputs
-            }
-
-            const systemVoltage = parseInt(sysVoltageEl.value);
-            const batteryType = batteryTypeEl.value;
-            const hsp = parseFloat(hspEl.value);
-            const autonomyDays = parseInt(autonomyEl.value);
-            const panelWattage = parseInt(panelWattageEl.value);
-            const safetyMargin = parseFloat(safetyMarginEl.value);
-
-            // 2. Cálculo de Batería de Respaldo (Ah)
-            let dod = 0.8; // Litio (80%)
-            if (batteryType === 'gel') dod = 0.5; // Gel (50%)
-            else if (batteryType === 'acid') dod = 0.45; // Plomo-Ácido (45%)
-
-            const inverterEfficiency = 0.92; // Eficiencia promedio del equipo híbrido
-            
-            // Fórmula: (Energía Diaria * Días Autonomía) / (Voltaje * Eficiencia * DoD)
-            const requiredAh = (totalDailyWh * autonomyDays) / (systemVoltage * inverterEfficiency * dod);
-            
-            const resBatAhEl = document.getElementById('res-bat-ah');
-            if (resBatAhEl) {
-                resBatAhEl.innerText = `${Math.ceil(requiredAh)} Ah`;
-            }
-            const resBatVoltEl = document.getElementById('res-bat-volt');
-            if (resBatVoltEl) {
-                resBatVoltEl.innerText = `${systemVoltage} V`;
-            }
-
-            // 3. Cálculo de Generación Solar (Módulos de Carga)
-            const safetyLossFactor = 1.25; // Pérdidas del sistema (temperatura, cableado, polvo)
-            const requiredWp = (totalDailyWh * safetyLossFactor) / hsp;
-            
-            const resPvPowerEl = document.getElementById('res-pv-power');
-            if (resPvPowerEl) {
-                resPvPowerEl.innerText = `${Math.round(requiredWp)} Wp`;
-            }
-
-            const qtyPanels = Math.ceil(requiredWp / panelWattage);
-            const resPvQtyEl = document.getElementById('res-pv-qty');
-            if (resPvQtyEl) {
-                resPvQtyEl.innerText = `${qtyPanels} Módulos de ${panelWattage}W`;
-            }
-
-            // 4. Cálculo de Corriente de Carga MPPT (Amperios)
-            const mpptCurrent = (qtyPanels * panelWattage) / systemVoltage * 1.25;
-            const resMpptCurrentEl = document.getElementById('res-mppt-current');
-            if (resMpptCurrentEl) {
-                resMpptCurrentEl.innerText = `${Math.ceil(mpptCurrent)} A`;
-            }
-
-            // 5. Capacidad Requerida del Inversor Híbrido (kW)
-            const requiredInverterWatts = totalPeakWatts * safetyMargin;
-            const inverterKw = (requiredInverterWatts / 1000).toFixed(2);
-            const resInvKwEl = document.getElementById('res-inv-kw');
-            if (resInvKwEl) {
-                resInvKwEl.innerText = `${inverterKw} kW`;
-            }
-
-            // 6. Alerta Técnica Dinámica
-            const techNoteBox = document.getElementById('tech-note-box');
-            const techNote = document.getElementById('tech-note');
-
-            if (techNote && techNoteBox) {
-                if (totalDailyWh === 0) {
-                    techNote.innerText = "Sugerencia: Modifica o añade cargas de tu local comercial para activar las estimaciones de ingeniería solar.";
-                    techNoteBox.className = "mt-4 p-4 rounded-xl bg-slate-950 border border-slate-800";
-                } else if (systemVoltage === 12 && inverterKw > 2) {
-                    techNote.innerText = "¡ADVERTENCIA DE DISEÑO!: Una potencia de inversor superior a 2 kW a 12V genera corrientes extremadamente elevadas (>160 Amperios en corriente continua). Esto requiere cables excesivamente gruesos para evitar incendios. Te recomendamos cambiar la tensión de operación del banco a 24V o 48V para garantizar la seguridad de tu tienda deportiva.";
-                    techNoteBox.className = "mt-4 p-4 rounded-xl bg-red-950/40 border border-red-500/30";
-                } else if (systemVoltage === 24 && inverterKw > 4.5) {
-                    techNote.innerText = "Recomendación: Estás operando al límite para una tensión de 24V. Pasar la configuración a 48V optimizará notablemente el rendimiento técnico de tu inversor híbrido MPPT.";
-                    techNoteBox.className = "mt-4 p-4 rounded-xl bg-amber-950/40 border border-amber-500/30";
-                } else {
-                    techNote.innerText = `Análisis Exitoso: Tu sistema de respaldo con tecnología híbrida MPPT está equilibrado. Garantizará un fluido eléctrico ininterrumpido del 100% para las luces de vitrina, climatización y puntos de cobro del local.`;
-                    techNoteBox.className = "mt-4 p-4 rounded-xl bg-blue-950/40 border border-blue-500/20";
-                }
-            }
+            document.getElementById('cart-subtotal').innerText = `$${subtotal.toLocaleString('es-CO')}`;
+            document.getElementById('cart-total').innerText = `$${subtotal.toLocaleString('es-CO')}`;
         }
 
-        // Inicializar cálculos al cargar la página
-        window.onload = function() {
-            calcularTodo();
+        // Simulación de envío del plan de entrenamiento
+        function solicitarAsesoriaTienda() {
+            // Verificar datos del usuario
+            const nombre = document.getElementById('usr-nombre').value.trim() || 'Deportista';
+            const telefono = document.getElementById('usr-telefono').value.trim() || 'No provisto';
+            const correo = document.getElementById('usr-correo').value.trim() || 'No provisto';
+
+            const selectPerfil = document.querySelector('input[name="perfil-deportista"]:checked');
+            const perfilVal = selectPerfil ? selectPerfil.value : 'runner';
+
+            const perfilesNombres = {
+                'runner': 'Runner de Asfalto',
+                'fitness': 'Guerrero de Fitness',
+                'trail': 'Explorador de Trail',
+                'pro': 'Atleta de Élite'
+            };
+
+            // Inyectar en el Modal
+            document.getElementById('m-nombre').innerText = nombre;
+            document.getElementById('m-telefono').innerText = telefono;
+            document.getElementById('m-correo').innerText = correo;
+            document.getElementById('m-perfil').innerText = perfilesNombres[perfilVal] || 'Deportista';
+
+            // Mostrar Modal
+            document.getElementById('modal-exito').classList.remove('hidden');
         }
+
+        function cerrarModalExito() {
+            document.getElementById('modal-exito').classList.add('hidden');
+            // Resetear el carrito tras el pedido
+            carrito = [];
+            actualizarCarritoUI();
+            cambiarPaso('paso-cuestionario');
+        }
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
